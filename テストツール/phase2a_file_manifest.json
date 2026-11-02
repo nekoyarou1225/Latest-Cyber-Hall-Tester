@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "note": "Does not include phase2a_file_manifest.json itself; verify manifest SHA-256 externally.",
+  "files": {
+    "DEVICE_MONITORING_DESIGN.md": {
+      "sha256": "693391842fe2ed5ed3da618b6e59207f5ff0db0d4c06baa748fe57f34e52b9fc",
+      "size_bytes": 6400,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "EVIDENCE_AND_REPORTING.md": {
+      "sha256": "ea31723d885bf507b8eb20a2f538806142319a18860ffb7f1ad935382212d81e",
+      "size_bytes": 7020,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "IMPLEMENTATION_AND_REGRESSION_PLAN.md": {
+      "sha256": "e57ab8f1747ea35b2044976c05f89dcb33ef8e130c27c02873f902fcd9e57b84",
+      "size_bytes": 15246,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "ISOLATION_THREAT_MODEL.md": {
+      "sha256": "e9781cf62df1dfe01e99fbf488766628f15d40bfcbe175e04d45bdde8c0f6cbc",
+      "size_bytes": 7982,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "MK1AI_SECURE_LINUX_DESIGN.md": {
+      "sha256": "b3899fdb80b7257646e6fa371c52477cc05990be672a69bacbdfe30010de7155",
+      "size_bytes": 7160,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "MULTI_OS_VIRTUALIZATION.md": {
+      "sha256": "c5de774b8cc3732f9464368502147f516096a2ff8872312ed752ecfa8a6b850b",
+      "size_bytes": 7107,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "OBS_STYLE_UI_AND_STREAMING.md": {
+      "sha256": "a0a1107c25ffb16d708211949e00e2339f8307838856301f990559240368e2d1",
+      "size_bytes": 10292,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "OS_IMAGE_BUILD_PLAN.md": {
+      "sha256": "33716ddebccd826326e1c42925483c6252511e097eb214f31e61dc366592c4ab",
+      "size_bytes": 6244,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "PACKET_AND_BOT_SIMULATION.md": {
+      "sha256": "427fc9fddf2dc98589d72a9992209dfb11de5dbd36afae9d885c8d273daad1ca",
+      "size_bytes": 11247,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "PERFORMANCE_AND_RESOURCE_LIMITS.md": {
+      "sha256": "c355c71dfdbae77082c5e1d408f8b962de19238ebe9bc76b4aef1c8fb0d424be",
+      "size_bytes": 6578,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "PHASE2A_VERIFICATION_REPORT.md": {
+      "sha256": "19487c86903f1f80a299a0e1a4fde71ec42b257bf05a5000b79f1585b396d0b3",
+      "size_bytes": 12675,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "PRIVACY_AND_REDACTION_DESIGN.md": {
+      "sha256": "679f88c2dd33a7f310adc49d066f3e6eb409befd06430ae245670a6647dc7b0d",
+      "size_bytes": 8091,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "SECURITY_TEST_SCENARIOS.md": {
+      "sha256": "43ba14f47682aa802eade8206a4fd7adec8a7561f38a1aab846db5c56e5378c5",
+      "size_bytes": 8665,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "SYSTEM_ARCHITECTURE.md": {
+      "sha256": "ef79c001521b5603dffd6e639929b9daedbaba81cfb51571a10cc502d04df366",
+      "size_bytes": 32798,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "XDP_DPI_ZERO_TRUST_PLAN.md": {
+      "sha256": "936bf21a67ccf19ff96389c8cc588278bd05b3db665b6860235d74da1650ee18",
+      "size_bytes": 7819,
+      "mode_octal": "644",
+      "preexisting_protected": true,
+      "owner_phase": "PHASE_1"
+    },
+    "aegislab/__init__.py": {
+      "sha256": "f27ae3731925ed0b111690517a81164d27fd7271fec28972ca333792fc4d0d0c",
+      "size_bytes": 519,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/core/__init__.py": {
+      "sha256": "a3059012aec7cc6b8f2caa89dcd669c1759cb163bd2dd5ee0436858d720bdfe3",
+      "size_bytes": 114,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/core/config_manager.py": {
+      "sha256": "c1aa4988c6f882253b901b604ef8a00df289ca0cc265d10ff025ccc921445b24",
+      "size_bytes": 8069,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/core/rollback_verifier.py": {
+      "sha256": "0ab1614e060c7423b7927453097187b4cb03fbae08266ec4ad46402b1421bd8d",
+      "size_bytes": 8735,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/core/safety_guard.py": {
+      "sha256": "65f90d7b0aa6b8d0238abc6626773280aed746d2739bac87fd6bec9674565b30",
+      "size_bytes": 7002,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/core/value_types.py": {
+      "sha256": "66322f00c53825ae2be411f573ef620f47eaf60ffe353fd8cb0746e19b126a82",
+      "size_bytes": 5544,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/evidence/__init__.py": {
+      "sha256": "1a5345ca46d87c82c1581903646786029bb9783e84b2c379e5c8c5492894a5fc",
+      "size_bytes": 114,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/evidence/recorder.py": {
+      "sha256": "594aee7ade942c30b492711dbd9df51e106f35d2e02cff2c15c333a0ed66d193",
+      "size_bytes": 6386,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/evidence/report_generator.py": {
+      "sha256": "ec969b7582ba1c194a4b096952d21d445b29119f809ecdfe9fdf34bdfcf78e7b",
+      "size_bytes": 6113,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/monitor/__init__.py": {
+      "sha256": "1b732086dee9472807efdbec7255fb91c7a3412ec285ab8f3d47071f9fcce04e",
+      "size_bytes": 79,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/monitor/device_monitor.py": {
+      "sha256": "776afb982d2f9804f50f549fa685cb8f17f2d995e615c8f8a607638deb9a6c60",
+      "size_bytes": 14077,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/privacy/__init__.py": {
+      "sha256": "1bc43162a55a6fd787a4b8c49378586ac39a65e793496fc6922f87349c2dea35",
+      "size_bytes": 84,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/privacy/redactor.py": {
+      "sha256": "bd1da7960c14814c1bbb42f645a7e91921636571e951e333039c5c0d9d359bc0",
+      "size_bytes": 12041,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/sim/__init__.py": {
+      "sha256": "87fd790920aec6db026e1fac3d0befa25908fb6419f7913fc9bd92b4b714d2a5",
+      "size_bytes": 107,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/sim/bot_simulator.py": {
+      "sha256": "535c36aafac713170048fe89ea55c1c59547382a6f70c91e900fa172cd27eb3b",
+      "size_bytes": 10021,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/sim/packet_counter.py": {
+      "sha256": "f6575b96fbc7851e4e98bc847111955aebbaee78a38b9ff68e7d55491e3787de",
+      "size_bytes": 8890,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/ui/__init__.py": {
+      "sha256": "0e0b7378d0da749dd28a7e2e800f7ebaf7af5156c9e93f86bd4ab60f15e662f3",
+      "size_bytes": 130,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "aegislab/ui/preview_app.py": {
+      "sha256": "f297b423b1bbf2ba87ee70f5bbd7f9ddffaa86261addafaf1ceef29070e876d0",
+      "size_bytes": 12542,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    },
+    "tests/test_phase2a_suite.py": {
+      "sha256": "68cd4a96bc3180997a776bbcf034413acd2e39f55aaa89cb1bfdfd2b963a859c",
+      "size_bytes": 23997,
+      "mode_octal": "644",
+      "preexisting_protected": false,
+      "owner_phase": "PHASE_2A"
+    }
+  }
+}

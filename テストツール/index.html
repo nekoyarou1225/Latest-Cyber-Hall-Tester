@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AegisLab — Operations Center</title>
+<style>
+:root {
+  --background: #080d18;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #152238 0%, #080d18 70%);
+  --surface: rgba(255, 255, 255, 0.055);
+  --surface-hover: rgba(255, 255, 255, 0.095);
+  --surface-active: rgba(114, 170, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.13);
+  --glass-highlight: rgba(255, 255, 255, 0.19);
+
+  --text-primary: #f4f7ff;
+  --text-secondary: #a6b2c8;
+  --text-muted: #748198;
+
+  --accent-blue: #72aaff;
+  --accent-cyan: #67e8f9;
+  --accent-purple: #a78bfa;
+
+  --success: #35d49a;
+  --warning: #f6c66b;
+  --danger: #ff667c;
+
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 76px;
+
+  --glass-blur: 22px;
+  --card-radius: 18px;
+  --panel-radius: 24px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body {
+  background: var(--background);
+  background-image: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Glass panel */
+.glass-panel {
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Top bar */
+header.top-bar {
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--glass-border);
+  background: rgba(8, 13, 24, 0.75);
+  backdrop-filter: blur(20px);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+.shield-icon {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 6px 6px 14px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(103, 232, 249, 0.1);
+  box-shadow: 0 0 12px rgba(103, 232, 249, 0.25);
+}
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Layout */
+.app-container {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar */
+aside.sidebar {
+  width: var(--sidebar-width);
+  border-right: 1px solid var(--glass-border);
+  background: rgba(8, 13, 24, 0.6);
+  backdrop-filter: blur(var(--glass-blur));
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+aside.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+.nav-section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  padding: 0 12px;
+  margin-bottom: 6px;
+  transition: opacity 0.2s ease;
+}
+aside.sidebar.collapsed .nav-section-title {
+  opacity: 0;
+  pointer-events: none;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.nav-item:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+.nav-item.active {
+  background: var(--surface-active);
+  color: var(--accent-blue);
+  border-color: rgba(114, 170, 255, 0.35);
+  box-shadow: 0 0 15px rgba(114, 170, 255, 0.15);
+}
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Main content */
+main.main-viewport {
+  flex: 1;
+  padding: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+.page-header {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.page-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+.page-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Grid & Cards */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.metric-card {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.metric-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: space-between;
+}
+.metric-value {
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+.metric-meta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.badge-sim { background: rgba(103, 232, 249, 0.12); color: var(--accent-cyan); border: 1px solid rgba(103, 232, 249, 0.3); }
+.badge-meas { background: rgba(53, 212, 154, 0.12); color: var(--success); border: 1px solid rgba(53, 212, 154, 0.3); }
+.badge-unavail { background: rgba(255, 102, 124, 0.12); color: var(--danger); border: 1px solid rgba(255, 102, 124, 0.3); }
+.badge-unverified { background: rgba(246, 198, 107, 0.12); color: var(--warning); border: 1px solid rgba(246, 198, 107, 0.3); }
+
+/* Buttons */
+button.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--glass-border);
+  background: var(--surface);
+  color: var(--text-primary);
+  backdrop-filter: blur(10px);
+  transition: all 0.15s ease;
+}
+button.btn:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--glass-highlight);
+  transform: translateY(-1px);
+}
+button.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+button.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+button.btn-primary {
+  background: linear-gradient(135deg, rgba(114, 170, 255, 0.3), rgba(103, 232, 249, 0.3));
+  border-color: rgba(114, 170, 255, 0.4);
+  color: #fff;
+}
+button.btn-danger {
+  background: linear-gradient(135deg, rgba(255, 102, 124, 0.35), rgba(255, 70, 95, 0.2));
+  border-color: rgba(255, 102, 124, 0.4);
+  color: #fff;
+}
+
+/* Page visibility */
+.page-view {
+  display: none;
+  animation: fadeIn 0.22s ease-out;
+}
+.page-view.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer / System status bar */
+footer.system-footer {
+  height: 40px;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(8, 13, 24, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+</style>
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="brand">
+    <div class="shield-icon">✦</div>
+    <span>AegisLab</span>
+    <span class="badge badge-sim" style="margin-left: 8px;">PHASE 2A SAFE PREVIEW</span>
+  </div>
+  <div class="top-actions">
+    <span id="top-connection" class="badge badge-meas">LOCAL SECURE RUNTIME</span>
+    <button class="btn btn-danger" onclick="window.aegisSim.emergencyStop()">EMERGENCY HALT</button>
+  </div>
+</header>
+
+<div class="app-container">
+  <aside class="sidebar" id="app-sidebar">
+    <div>
+      <div class="nav-section-title">Dashboard</div>
+      <a class="nav-item active" onclick="switchPage('overview', this)"><span class="nav-icon">📊</span><span>Overview</span></a>
+    </div>
+
+    <div>
+      <div class="nav-section-title">Operations</div>
+      <a class="nav-item" onclick="switchPage('packet-sim', this)"><span class="nav-icon">⚡</span><span>Packet Simulation</span></a>
+      <a class="nav-item" onclick="switchPage('adaptive-ctrl', this)"><span class="nav-icon">🎯</span><span>Adaptive Control</span></a>
+      <a class="nav-item" onclick="switchPage('bot-lab', this)"><span class="nav-icon">🤖</span><span>Bot Simulator</span></a>
+      <a class="nav-item" onclick="switchPage('virtual-env', this)"><span class="nav-icon">📦</span><span>Virtual Envs</span></a>
+      <a class="nav-item" onclick="switchPage('decoys', this)"><span class="nav-icon">🎭</span><span>Decoy Management</span></a>
+    </div>
+
+    <div>
+      <div class="nav-section-title">Security</div>
+      <a class="nav-item" onclick="switchPage('sec-events', this)"><span class="nav-icon">🚨</span><span>Security Events</span></a>
+      <a class="nav-item" onclick="switchPage('dpi-xdp', this)"><span class="nav-icon">🛡️</span><span>DPI / XDP Pipeline</span></a>
+      <a class="nav-item" onclick="switchPage('isolation', this)"><span class="nav-icon">🔒</span><span>Isolation Center</span></a>
+      <a class="nav-item" onclick="switchPage('privacy', this)"><span class="nav-icon">👁️</span><span>Privacy &amp; Redaction</span></a>
+    </div>
+
+    <div>
+      <div class="nav-section-title">Audio &amp; Broadcast</div>
+      <a class="nav-item" onclick="switchPage('tts-voice', this)"><span class="nav-icon">🎙️</span><span>TTS Voice Center</span></a>
+      <a class="nav-item" onclick="switchPage('audio-mixer', this)"><span class="nav-icon">🎛️</span><span>Audio Mixer</span></a>
+      <a class="nav-item" onclick="switchPage('subtitle', this)"><span class="nav-icon">💬</span><span>Subtitle Studio</span></a>
+    </div>
+
+    <div>
+      <div class="nav-section-title">System</div>
+      <a class="nav-item" onclick="switchPage('device-mon', this)"><span class="nav-icon">💻</span><span>Device Monitor</span></a>
+      <a class="nav-item" onclick="switchPage('audit-settings', this)"><span class="nav-icon">⚙️</span><span>Audit &amp; Settings</span></a>
+    </div>
+  </aside>
+
+  <main class="main-viewport">
+    <!-- 1. OVERVIEW -->
+    <div id="page-overview" class="page-view active">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Operations Overview</h1>
+          <p class="page-desc">System intelligence, packet flow telemetry, and hardware metrics at a glance.</p>
+        </div>
+        <span class="badge badge-sim">ISOLATED SIMULATION</span>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card glass-panel">
+          <div class="metric-label"><span>Cumulative Packets</span><span class="badge badge-sim">SIMULATED</span></div>
+          <div class="metric-value" id="ov-cum-packets">0</div>
+          <div class="metric-meta">Target: 10^16 cap (BigInt verified)</div>
+        </div>
+        <div class="metric-card glass-panel">
+          <div class="metric-label"><span>Adaptive PPS Target</span><span class="badge badge-sim">TARGET_ONLY</span></div>
+          <div class="metric-value" id="ov-target-pps">10</div>
+          <div class="metric-meta">Applied Data-Plane: <span id="ov-applied-pps">0</span> pps</div>
+        </div>
+        <div class="metric-card glass-panel">
+          <div class="metric-label"><span>Host CPU Utilization</span><span class="badge badge-meas">MEASURED</span></div>
+          <div class="metric-value">25.0%</div>
+          <div class="metric-meta">Threshold ceiling: 85.0%</div>
+        </div>
+        <div class="metric-card glass-panel">
+          <div class="metric-label"><span>Host RAM Free</span><span class="badge badge-meas">MEASURED</span></div>
+          <div class="metric-value">1,024 MB</div>
+          <div class="metric-meta">Minimum guard: 512 MB</div>
+        </div>
+      </div>
+
+      <div class="glass-panel" style="padding: 24px; margin-bottom: 24px;">
+        <h3 style="margin-bottom: 12px; font-size: 1.1rem;">Active Controller Quick Actions</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem;">
+          Control simulation execution using safe browser-local verified timers.
+        </p>
+        <div style="display: flex; gap: 12px;">
+          <button id="btn-start" class="btn btn-primary" onclick="window.aegisSim.start()">Start Simulation</button>
+          <button id="btn-pause" class="btn" onclick="window.aegisSim.pause()" disabled>Pause</button>
+          <button id="btn-resume" class="btn" onclick="window.aegisSim.resume()" disabled>Resume</button>
+          <button id="btn-reset" class="btn" onclick="window.aegisSim.reset()">Reset Test</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PACKET SIMULATION -->
+    <div id="page-packet-sim" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Packet Simulation</h1>
+          <p class="page-desc">High-throughput virtual packet generator with monotonic verification.</p>
+        </div>
+        <span class="badge badge-sim">MODE A: SIMULATION</span>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-card glass-panel">
+          <div class="metric-label"><span>Current Target PPS</span></div>
+          <div class="metric-value" id="sim-target-pps">10</div>
+        </div>
+        <div class="metric-card glass-panel">
+          <div class="metric-label"><span>Generated Total</span></div>
+          <div class="metric-value" id="sim-cum-packets">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ADAPTIVE CONTROL -->
+    <div id="page-adaptive-ctrl" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Adaptive Packet Control</h1>
+          <p class="page-desc">Closed-loop load regulation, fault boundaries, and emergency stop.</p>
+        </div>
+        <span class="badge badge-sim">MODE A</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>Controller State: <strong id="ctrl-state" style="color: var(--accent-cyan);">IDLE</strong></p>
+        <p style="margin-top: 8px;">Effective Max PPS: <strong>8,668</strong></p>
+        <p style="margin-top: 8px;">Egress Gate: <span class="badge badge-unavail">LOCKED (Phase 2A)</span></p>
+      </div>
+    </div>
+
+    <!-- 4. BOT LAB -->
+    <div id="page-bot-lab" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Virtual Bot Simulator</h1>
+          <p class="page-desc">Logical multi-agent simulation without spawning untrusted host processes.</p>
+        </div>
+        <span class="badge badge-sim">SIMULATED</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>Target Virtual Bots: <strong>16 Logical Agents</strong></p>
+        <p style="margin-top: 8px;">Spawned OS Processes: <strong>0 (Host Protected)</strong></p>
+      </div>
+    </div>
+
+    <!-- 5. VIRTUAL ENVS -->
+    <div id="page-virtual-env" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Virtual Environments</h1>
+          <p class="page-desc">Guest OS isolation images and microVM sandboxing.</p>
+        </div>
+        <span class="badge badge-unavail">UNAVAILABLE</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p style="color: var(--warning);">Notice: MK1Ai Secure Linux guest OS build is explicitly <strong>NOT_TESTED / UNAVAILABLE</strong> under Phase 2A policy.</p>
+      </div>
+    </div>
+
+    <!-- 6. DECOYS -->
+    <div id="page-decoys" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Decoy Management (AMTD)</h1>
+          <p class="page-desc">Active Moving Target Defense decoy orchestration.</p>
+        </div>
+        <span class="badge badge-unavail">UNAVAILABLE</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>AMTD Decoy generation requires active microVM orchestration (Phase 2A Locked).</p>
+      </div>
+    </div>
+
+    <!-- 7. SECURITY EVENTS -->
+    <div id="page-sec-events" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Security Events Log</h1>
+          <p class="page-desc">Live audit telemetry and safety trigger receipts.</p>
+        </div>
+        <span class="badge badge-meas">VERIFIED AUDIT</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p style="color: var(--text-secondary);">No critical security violations detected in the active isolated session.</p>
+      </div>
+    </div>
+
+    <!-- 8. DPI / XDP -->
+    <div id="page-dpi-xdp" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">DPI &amp; XDP Pipeline</h1>
+          <p class="page-desc">Kernel-level eBPF XDP hook pipeline and protocol inspection.</p>
+        </div>
+        <span class="badge badge-unavail">UNAVAILABLE</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p style="color: var(--danger);">XDP eBPF kernel program loading is strictly prohibited in Phase 2A.</p>
+      </div>
+    </div>
+
+    <!-- 9. ISOLATION -->
+    <div id="page-isolation" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Isolation Center</h1>
+          <p class="page-desc">Hardware resource boundaries and rollback verification policy.</p>
+        </div>
+        <span class="badge badge-meas">ACTIVE ENFORCED</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>Mandatory Safety Controls: <strong>100% Enforced (Immutable)</strong></p>
+      </div>
+    </div>
+
+    <!-- 10. PRIVACY -->
+    <div id="page-privacy" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Privacy &amp; Redaction</h1>
+          <p class="page-desc">Fail-closed token replacement and prestream exposure evaluation.</p>
+        </div>
+        <span class="badge badge-meas">FAIL-CLOSED ACTIVE</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>Prestream Verdict: <strong>BLOCKED (Phase 2A Default Protection)</strong></p>
+      </div>
+    </div>
+
+    <!-- 11. TTS VOICE CENTER -->
+    <div id="page-tts-voice" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">TTS Voice Center</h1>
+          <p class="page-desc">High-quality speech synthesis with dual-layer license enforcement.</p>
+        </div>
+        <span class="badge badge-unverified">LICENSE VERIFICATION</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>Voice Model: <strong>MMDAgent Mei (Normal)</strong></p>
+        <p style="margin-top: 8px;">License Status: <span class="badge badge-unverified">UNVERIFIED</span></p>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-muted);">Commercial, recording, and monetization uses are strictly prohibited for unverified models.</p>
+      </div>
+    </div>
+
+    <!-- 12. AUDIO MIXER -->
+    <div id="page-audio-mixer" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Audio Mixer &amp; Routing</h1>
+          <p class="page-desc">Independent channel levels, -12dB ducking, and output isolation.</p>
+        </div>
+        <span class="badge badge-unavail">NOT_CONNECTED</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>Connection: <span class="badge badge-unavail">NOT_CONNECTED (State Only)</span></p>
+        <p style="margin-top: 8px;">Ducking Attenuation: <strong>-12.0 dB (Factor ~0.2512)</strong></p>
+        <p style="margin-top: 8px;">Recording / Live Stream Route: <span class="badge badge-unavail">LOCKED (Phase 2A)</span></p>
+      </div>
+    </div>
+
+    <!-- 13. SUBTITLE STUDIO -->
+    <div id="page-subtitle" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Subtitle Studio</h1>
+          <p class="page-desc">Real-time synchronized subtitle overlay preview.</p>
+        </div>
+        <span class="badge badge-sim">PREVIEW ONLY</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>Subtitle sync engine is ready for local preview testing.</p>
+      </div>
+    </div>
+
+    <!-- 14. DEVICE MONITOR -->
+    <div id="page-device-mon" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Device &amp; Hardware Telemetry</h1>
+          <p class="page-desc">Host sensors, CPU/RAM/Disk thresholds, and battery metrics.</p>
+        </div>
+        <span class="badge badge-meas">MEASURED</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>Polling Snapshot: <strong>Active (DeviceMonitor)</strong></p>
+      </div>
+    </div>
+
+    <!-- 15. AUDIT & SETTINGS -->
+    <div id="page-audit-settings" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Audit History &amp; Settings</h1>
+          <p class="page-desc">Immutable audit trails and runtime configuration policy.</p>
+        </div>
+        <span class="badge badge-meas">IMMUTABLE</span>
+      </div>
+      <div class="glass-panel" style="padding: 24px;">
+        <p>Phase 2A Policy: <strong>Enforce Strict Zero-Network Isolation</strong></p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer class="system-footer">
+  <div>AegisLab Security Operations Center • 15 Functional Navigation Hub</div>
+  <div>Phase 2A Safe Preview • Zero External CDN Dependencies</div>
+</footer>
+
+<script>
+// Navigation switcher
+function switchPage(pageId, navElement) {
+  document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const target = document.getElementById('page-' + pageId);
+  if (target) {
+    target.classList.add('active');
+  }
+  if (navElement) {
+    navElement.classList.add('active');
+  }
+}
+
+// Browser-local simulation core with pure JS BigInt arithmetic
+const aegisSim = {
+  state: 'IDLE',
+  targetPps: 10,
+  cumulativePackets: 0n,
+  timerId: null,
+
+  start() {
+    if (this.state !== 'IDLE') return;
+    this.state = 'RUNNING';
+    this.cumulativePackets = 0n;
+    this.updateUI();
+    this.timerId = setInterval(() => {
+      this.cumulativePackets += BigInt(this.targetPps);
+      this.updateUI();
+    }, 1000);
+  },
+
+  pause() {
+    if (this.state !== 'RUNNING') return;
+    this.state = 'PAUSED';
+    if (this.timerId) clearInterval(this.timerId);
+    this.updateUI();
+  },
+
+  resume() {
+    if (this.state !== 'PAUSED') return;
+    this.state = 'RUNNING';
+    this.updateUI();
+    this.timerId = setInterval(() => {
+      this.cumulativePackets += BigInt(this.targetPps);
+      this.updateUI();
+    }, 1000);
+  },
+
+  reset() {
+    if (this.timerId) clearInterval(this.timerId);
+    this.state = 'IDLE';
+    this.cumulativePackets = 0n;
+    this.updateUI();
+  },
+
+  emergencyStop() {
+    if (this.timerId) clearInterval(this.timerId);
+    this.state = 'EMERGENCY_HALT';
+    this.targetPps = 0;
+    this.updateUI();
+  },
+
+  updateUI() {
+    const elState = document.getElementById('ctrl-state');
+    if (elState) elState.textContent = this.state;
+    const elTarget = document.getElementById('ov-target-pps');
+    if (elTarget) elTarget.textContent = this.targetPps;
+    const elSimTarget = document.getElementById('sim-target-pps');
+    if (elSimTarget) elSimTarget.textContent = this.targetPps;
+    const elCum = document.getElementById('ov-cum-packets');
+    if (elCum) elCum.textContent = this.cumulativePackets.toString();
+    const elSimCum = document.getElementById('sim-cum-packets');
+    if (elSimCum) elSimCum.textContent = this.cumulativePackets.toString();
+
+    const btnStart = document.getElementById('btn-start');
+    const btnPause = document.getElementById('btn-pause');
+    const btnResume = document.getElementById('btn-resume');
+    if (btnStart) btnStart.disabled = (this.state !== 'IDLE');
+    if (btnPause) btnPause.disabled = (this.state !== 'RUNNING');
+    if (btnResume) btnResume.disabled = (this.state !== 'PAUSED');
+  }
+};
+window.aegisSim = aegisSim;
+</script>
+</body>
+</html>

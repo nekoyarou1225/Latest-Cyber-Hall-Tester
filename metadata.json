@@ -1,0 +1,8 @@
+{
+  "name": "サンダーホール (THUNDERHALL)",
+  "description": "次世代プレミアム・セキュリティ・テスター。1京パケット規模のシミュレーション、ハニーポット管理、および高度な暗号学的ライセンス検証を備えた、商用・研究・企業向けの統合セキュリティ運用基盤。",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
