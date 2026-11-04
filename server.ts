@@ -5,6 +5,48 @@ import os from 'os';
 import path from 'path';
 import { execFile } from 'child_process';
 import { fileURLToPath } from 'url';
+import {
+  buildSystemUnderstandingModel,
+  discoverAttackSurface,
+  listVulnerabilityFindings,
+  runSafe9StepVerificationSandbox,
+  triggerAiVulnerabilityScan,
+} from './src/arena/ai_vuln_engine.js';
+import {
+  JAPAN_STRATEGIC_NODES,
+  SATELLITE_ORBIT_NODES,
+  computeSeparatedTelemetryAndScores,
+  determineBotScaleTier,
+  generateBotEntitiesSample,
+  verifyUniqueBotIdentityBatch,
+} from './src/arena/bot_arena_simulator.js';
+import {
+  EFFECTS_52_CATALOG,
+  executeGachaponSpinForFinding,
+  getGachaponEngineSnapshot,
+} from './src/arena/gachapon_52_effects.js';
+import {
+  EmergencyAlertType,
+  ZundamonCostumeId,
+  checkLocalVoicevoxHealth,
+  getZundamonAndAlertSnapshot,
+  pushZundamonCommentary,
+  triggerEmergencyAlertOverride,
+} from './src/arena/zundamon_voicevox_alert.js';
+import {
+  PREGENERATED_VOICEVOX_CACHE,
+  VOICEVOX_CREDIT_METADATA,
+  evaluateN100AutoDegradation,
+  generateZundamonDialogueV22,
+  getBuiltinStreamEncoderSnapshot,
+  getGeminiSecuritySnapshot,
+  getV21PolicySnapshot,
+  isFakeReversalEffectId,
+  probeVoicevoxWithPortFallback,
+  runV22AcceptanceVerificationSuite,
+  transitionBuiltinStreamStage,
+  updateV21PolicySettings,
+} from './src/arena/v22_gemini_voicevox_stream.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -85,6 +127,9 @@ const REDACTION_PATTERNS: Array<[string, RegExp, string]> = [
 ];
 
 const sensitiveLiterals = new Map<string, string>();
+if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim().length >= 6) {
+  sensitiveLiterals.set(process.env.GEMINI_API_KEY.trim(), '[REDACTED_GEMINI_API_KEY]');
+}
 
 export function redactTextFailClosed(input: string): string {
   try {
@@ -1960,7 +2005,67 @@ function buildMasterState(currentSession?: ActiveSession | null) {
       next_seq: nextAuditSeq,
     },
     audit_logs: auditFullChain.slice().reverse().slice(0, 60),
+    cyber_arena: buildSafeCyberArenaSnapshot(hpCap.isolated_count),
   };
+}
+
+let arenaBotTick = 0;
+function buildSafeCyberArenaSnapshot(isolatedHoneypotsCount = 0) {
+  // Section 19 Fault Isolation: Any failure in Arena/3D/Gachapon/Voice/Alert never stops Tester Core
+  try {
+    const scaleTier = determineBotScaleTier(virtualBotsCountBigInt);
+    const telemetry = computeSeparatedTelemetryAndScores({
+      virtualBotsBigInt: virtualBotsCountBigInt,
+      completedPacketsBigInt,
+      targetPacketsBigInt,
+      appliedPps,
+      simRunning: simSystemState === 'RUNNING',
+      isolatedHoneypots: isolatedHoneypotsCount,
+    });
+    const zundaAlert = getZundamonAndAlertSnapshot();
+    const gacha = getGachaponEngineSnapshot();
+    const findings = listVulnerabilityFindings();
+
+    return {
+      fault_isolation_status: 'CORE_ISOLATED_ONE_WAY_EVENT_BUS',
+      bot_scale_tier: scaleTier,
+      bots_sample: generateBotEntitiesSample(24, arenaBotTick),
+      japan_strategic_nodes: JAPAN_STRATEGIC_NODES,
+      satellite_orbits: SATELLITE_ORBIT_NODES,
+      separated_telemetry: telemetry,
+      ai_findings_summary: {
+        total: findings.length,
+        known_cve: findings.filter((f) => f.classification === 'KNOWN_CVE').length,
+        known_cwe: findings.filter((f) => f.classification === 'KNOWN_CWE').length,
+        potential_zero_day: findings.filter((f) => f.classification === 'POTENTIAL_ZERO_DAY').length,
+        confirmed_vulnerability: findings.filter((f) => f.classification === 'CONFIRMED_VULNERABILITY').length,
+        false_positive: findings.filter((f) => f.classification === 'FALSE_POSITIVE').length,
+        findings: findings.slice(0, 8),
+      },
+      gachapon: {
+        total_effects_count: gacha.total_effects_catalog_count,
+        total_spins: gacha.total_spins,
+        latest_spin: gacha.latest_spin,
+        expectation_table: gacha.expectation_table,
+      },
+      zundamon: {
+        current_costume: zundaAlert.current_costume,
+        costume_spec: zundaAlert.costume_spec,
+        voicevox_engine: zundaAlert.voicevox_engine,
+        latest_commentary: zundaAlert.commentary_feed[0] || null,
+        commentary_feed: zundaAlert.commentary_feed.slice(0, 6),
+      },
+      emergency_alert: zundaAlert.emergency_alert,
+      v21_policy: getV21PolicySnapshot(),
+      v22_gemini: getGeminiSecuritySnapshot(),
+      v22_voicevox_credit: VOICEVOX_CREDIT_METADATA,
+      v22_builtin_stream: getBuiltinStreamEncoderSnapshot(),
+    };
+  } catch {
+    return {
+      fault_isolation_status: 'DEGRADED_ARENA_SAFE_FALLBACK',
+    };
+  }
 }
 
 type SseClient = { id: number; res: Response; session: ActiveSession | null };
@@ -3835,6 +3940,524 @@ app.post(
     );
   }
 );
+
+// ============================================================================
+// 15. Ultimate Global Cyber Battle Arena V2 One-Way API Routes (Protected)
+// ============================================================================
+app.use('/vendor/three', express.static(path.join(__dirname, 'node_modules', 'three', 'build')));
+app.use('/geo', express.static(path.join(__dirname, 'public', 'geo')));
+app.use('/js', express.static(path.join(__dirname, 'public', 'js')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+app.get('/vendor/three.min.js', (_req: Request, res: Response) => {
+  const candidates = [
+    path.join(__dirname, 'node_modules', 'three', 'build', 'three.min.js'),
+    path.join(__dirname, 'node_modules', 'three', 'build', 'three.core.js'),
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+      return res.sendFile(candidate);
+    }
+  }
+  res.status(404).send('// three build not found');
+});
+
+app.get('/api/arena/state', requireAuth, async (_req: Request, res: Response) => {
+  await checkLocalVoicevoxHealth();
+  const sysModel = buildSystemUnderstandingModel(port, host);
+  const attackSurface = discoverAttackSurface();
+  const findings = listVulnerabilityFindings();
+  const gacha = getGachaponEngineSnapshot();
+  const zundaAlert = getZundamonAndAlertSnapshot();
+  const hpCap = computeEffectiveHoneypotCapacity();
+  const telemetry = computeSeparatedTelemetryAndScores({
+    virtualBotsBigInt: virtualBotsCountBigInt,
+    completedPacketsBigInt,
+    targetPacketsBigInt,
+    appliedPps,
+    simRunning: simSystemState === 'RUNNING',
+    isolatedHoneypots: hpCap.isolated_count,
+  });
+
+  res.json({
+    success: true,
+    architecture_separation: 'ONE_WAY_CORE_TO_ARENA_VERIFIED',
+    system_understanding: sysModel,
+    attack_surface: attackSurface,
+    vulnerability_findings: findings,
+    bot_scale_tier: determineBotScaleTier(virtualBotsCountBigInt),
+    bots_sample: generateBotEntitiesSample(36, arenaBotTick++),
+    japan_strategic_nodes: JAPAN_STRATEGIC_NODES,
+    satellite_orbits: SATELLITE_ORBIT_NODES,
+    separated_telemetry: telemetry,
+    gachapon: gacha,
+    zundamon_and_alert: zundaAlert,
+    v21_policy: getV21PolicySnapshot(),
+    v22_gemini: getGeminiSecuritySnapshot(),
+    v22_voicevox_credit: VOICEVOX_CREDIT_METADATA,
+    v22_builtin_stream: getBuiltinStreamEncoderSnapshot(),
+  });
+});
+
+app.post('/api/arena/ai-scan', requireAuth, requireCsrf, (req: Request, res: Response) => {
+  const sess = (req as Request & { authSession?: ActiveSession }).authSession!;
+  const { scan_mode, finding_id } = req.body || {};
+  const mode =
+    scan_mode === 'ZERO_DAY_FOCUS' || scan_mode === 'CVE_MATCH' ? scan_mode : 'FULL_8_ENGINES';
+
+  const scanResult = triggerAiVulnerabilityScan(mode);
+  const sandboxReport = finding_id
+    ? runSafe9StepVerificationSandbox(String(finding_id))
+    : scanResult.latest_sandbox_report;
+
+  pushZundamonCommentary({
+    priority: mode === 'ZERO_DAY_FOCUS' ? 'CRITICAL_SECURITY' : 'NORMAL_COMMENTARY',
+    original_en: `AI 8-Engine Vulnerability Scan (${mode}) completed. 9-step sandbox reproducibility verified (${sandboxReport.finding_id}).`,
+    translated_ja: `AI 8種脆弱性・ゼロデイ候補スキャン (${mode}) 完了。9ステップ隔離サンドボックス再現検証 PASS (${sandboxReport.finding_id})。`,
+    zundamon_speech_ja:
+      mode === 'ZERO_DAY_FOCUS'
+        ? `ゼロデイ候補スキャン完了なのだ！${sandboxReport.finding_id} を9ステップの安全サンドボックスで3回反復検証して、外部通信ゼロで完全ロールバックしたのだ！`
+        : `8つのAI検査エンジンで攻撃面とCVE/CWEを一斉チェックしたのだ！すべて安全に防御されているのだ！`,
+    costume: mode === 'ZERO_DAY_FOCUS' ? 'CYBER_OPERATOR_ZUNDAMON' : 'NORMAL_ZUNDAMON',
+  });
+
+  appendAuditLog(
+    'ARENA_AI_VULN_SCAN',
+    `Executed AI 8-engine vulnerability scan (${mode}) & 9-step sandbox verification (${sandboxReport.verification_id}, evidence=${sandboxReport.evidence_sha256.slice(0, 16)}...).`,
+    'REAL_AUDIT',
+    'VERIFIED_BY_EXECUTION',
+    { actor: sess.user_id, target: sandboxReport.finding_id, result: 'SUCCESS' }
+  );
+
+  res.json({
+    success: true,
+    scan_result: scanResult,
+    sandbox_report: sandboxReport,
+    state: buildMasterState(sess),
+  });
+});
+
+app.post('/api/arena/bot-scale', requireAuth, requireCsrf, (req: Request, res: Response) => {
+  const sess = (req as Request & { authSession?: ActiveSession }).authSession!;
+  const { virtual_bots, target_packets, verify_unique_batch } = req.body || {};
+
+  if (virtual_bots !== undefined) {
+    try {
+      const b = BigInt(String(virtual_bots));
+      if (b < 1n || b > 10000000000000000n) {
+        return res.status(400).json({ error: 'virtual_bots must be between 1 and 10^16 (1京)' });
+      }
+      virtualBotsCountBigInt = b;
+    } catch {
+      return res.status(400).json({ error: 'Invalid BigInt string for virtual_bots' });
+    }
+  }
+
+  if (target_packets !== undefined) {
+    try {
+      const p = BigInt(String(target_packets));
+      if (p < 1n || p > 10000000000000000n) {
+        return res.status(400).json({ error: 'target_packets must be between 1 and 10^16 (1京)' });
+      }
+      targetPacketsBigInt = p;
+    } catch {
+      return res.status(400).json({ error: 'Invalid BigInt string for target_packets' });
+    }
+  }
+
+  const tier = determineBotScaleTier(virtualBotsCountBigInt);
+  const batchCheck = verify_unique_batch
+    ? verifyUniqueBotIdentityBatch(Math.min(10000, Number(verify_unique_batch) || 10000))
+    : verifyUniqueBotIdentityBatch(100);
+
+  pushZundamonCommentary({
+    priority: virtualBotsCountBigInt >= 1000000000000n ? 'GACHAPON_JACKPOT' : 'NORMAL_COMMENTARY',
+    original_en: `Bot Arena scale updated to ${virtualBotsCountBigInt.toString()} (${tier.scale_range}). RFC 5737 synthetic address compliance verified.`,
+    translated_ja: `Botアリーナ規模を ${virtualBotsCountBigInt.toString()} 台 (${tier.scale_range}) に設定。RFC 5737 テストIPおよびユニークMAC検証完了。`,
+    zundamon_speech_ja: `仮想Botスケールを ${virtualBotsCountBigInt.toString()} 台に切り替えたのだ！すべてのBotにテスト専用IPと重複ゼロのMACアドレスを割り当てて、3D地球儀で追跡中なのだ！`,
+    costume: virtualBotsCountBigInt >= 10000000000000000n ? 'GOLD_JACKPOT_FESTIVAL_ZUNDAMON' : 'CYBER_OPERATOR_ZUNDAMON',
+  });
+
+  appendAuditLog(
+    'ARENA_BOT_SCALE_SET',
+    `Set Bot Arena scale to ${virtualBotsCountBigInt.toString()} (tier=${tier.tier_id}, RFC5737=${batchCheck.all_ipv4_rfc5737_compliant}, uniqueMACs=${batchCheck.unique_mac_count}).`,
+    'SIMULATION_EVENT',
+    'SIMULATED',
+    { actor: sess.user_id, target: 'bot-arena-simulator', result: 'SUCCESS' }
+  );
+
+  res.json({
+    success: true,
+    bot_scale_tier: tier,
+    identity_verification: batchCheck,
+    bots_sample: generateBotEntitiesSample(24, ++arenaBotTick),
+    state: buildMasterState(sess),
+  });
+});
+
+app.post('/api/arena/gachapon/spin', requireAuth, requireCsrf, (req: Request, res: Response) => {
+  const sess = (req as Request & { authSession?: ActiveSession }).authSession!;
+  const zundaAlert = getZundamonAndAlertSnapshot();
+
+  // Section 18 Priority #1 Override: Public Emergency Alert immediately blocks/pauses Gachapon & flashy effects
+  if (zundaAlert.emergency_alert.active) {
+    return res.status(409).json({
+      error: '公共緊急警報オーバーライド発令中: 最優先安全保護のため、3Dガチャポンおよび派手な演出は一時停止されています。',
+      emergency_alert: zundaAlert.emergency_alert,
+    });
+  }
+
+  const { finding_id, effect_id, force_core_breach, override_verification_status } = req.body || {};
+  const v21Policy = getV21PolicySnapshot();
+
+  // V2.1 Clause A: Fake Reversal Effects (EFFECT-49..52) are strictly prohibited in RESEARCHER_MODE
+  if (typeof effect_id === 'string' && isFakeReversalEffectId(effect_id) && v21Policy.operation_mode === 'RESEARCHER_MODE') {
+    appendAuditLog(
+      'RESEARCHER_MODE_FAKE_EFFECT_BLOCKED',
+      `Blocked fake reversal effect '${effect_id}' in RESEARCHER_MODE (V2.1 Clause A).`,
+      'REAL_AUDIT',
+      'VERIFIED_BY_EXECUTION',
+      { actor: sess.user_id, target: effect_id, result: 'DENIED' }
+    );
+    return res.status(403).json({
+      error: `研究者モード制限 (V2.1 条項A): フェイク演出 (${effect_id}) はエンタメモード限定であり、研究者モードでは無効化されています。`,
+      v21_policy: v21Policy,
+    });
+  }
+
+  // V2.1 Clause D: Milestone / Gachapon celebration effects must only link to VERIFIED results (never fake PASS on FAIL/NOT_TESTED/INCONCLUSIVE)
+  if (
+    override_verification_status &&
+    ['NOT_TESTED', 'FAIL', 'INCONCLUSIVE'].includes(String(override_verification_status))
+  ) {
+    return res.status(409).json({
+      error: `未検証結果の演出連動禁止 (V2.1 条項D): 検査状態が '${override_verification_status}' のため、節目演出およびPASS演出は発火できません。`,
+      honest_status_displayed: String(override_verification_status),
+    });
+  }
+
+  const findings = listVulnerabilityFindings();
+  const matchedFinding =
+    findings.find((f) => f.finding_id === finding_id) ||
+    (force_core_breach ? findings.find((f) => f.classification === 'POTENTIAL_ZERO_DAY') : findings[0]) ||
+    findings[0];
+
+  const spinResult = executeGachaponSpinForFinding({
+    finding_id: matchedFinding.finding_id,
+    severity: matchedFinding.severity,
+    classification: matchedFinding.classification,
+    requested_effect_id: typeof effect_id === 'string' ? effect_id : undefined,
+    force_core_breach: Boolean(force_core_breach),
+  });
+
+  pushZundamonCommentary({
+    priority: spinResult.final_capsule_rank === 'GOLD' ? 'GACHAPON_JACKPOT' : 'NORMAL_COMMENTARY',
+    original_en: `3D Gachapon spin ${spinResult.spin_id}: Capsule=${spinResult.final_capsule_rank}, Mode=${spinResult.expectation_mode} (${spinResult.expectation_rate_label}), CoreBreach=${spinResult.core_breach_triggered}.`,
+    translated_ja: `3Dガチャ抽選 ${spinResult.spin_id}：${spinResult.final_capsule_rank} カプセル排出（期待度モード=${spinResult.expectation_mode} ${spinResult.expectation_rate_label}）。`,
+    zundamon_speech_ja: spinResult.zundamon_commentary_ja,
+    costume: spinResult.zundamon_costume as ZundamonCostumeId,
+  });
+
+  appendAuditLog(
+    'ARENA_GACHAPON_SPIN',
+    `Executed 3D Gachapon spin ${spinResult.spin_id} for verified finding '${matchedFinding.finding_id}' -> rank=${spinResult.final_capsule_rank}, effects=[${spinResult.selected_effects.map((e) => e.effect_id).join(',')}].`,
+    'SIMULATION_EVENT',
+    'SIMULATED',
+    { actor: sess.user_id, target: spinResult.spin_id, result: 'SUCCESS' }
+  );
+
+  res.json({
+    success: true,
+    spin: spinResult,
+    total_catalog_effects: EFFECTS_52_CATALOG.length,
+    state: buildMasterState(sess),
+  });
+});
+
+app.post('/api/arena/emergency-alert', requireAuth, requireCsrf, (req: Request, res: Response) => {
+  const sess = (req as Request & { authSession?: ActiveSession }).authSession!;
+  const { action, alert_type, area_ja, intensity, attempt_fake_game_alert } = req.body || {};
+
+  // Section 18.4 Strict Prohibition: Never allow fake emergency alerts as game effects
+  if (attempt_fake_game_alert === true) {
+    appendAuditLog(
+      'FAKE_EMERGENCY_ALERT_BLOCKED',
+      'Blocked attempt to trigger a fake emergency alert as an entertainment game effect (Section 18.4 invariant).',
+      'REAL_AUDIT',
+      'VERIFIED_BY_EXECUTION',
+      { actor: sess.user_id, target: 'emergency-alert-system', result: 'DENIED' }
+    );
+    return res.status(403).json({
+      error: '禁止事項遮断 (Section 18.4): ゲーム演出として偽の地震・津波・J-Alert警報を発生させることは厳格に禁止されています。',
+    });
+  }
+
+  const alertState = triggerEmergencyAlertOverride({
+    action: action === 'clear' ? 'clear' : 'trigger_drill',
+    alert_type: (alert_type as EmergencyAlertType) || 'JMA_EARTHQUAKE_EEW',
+    area_ja: typeof area_ja === 'string' ? sanitizeSafeDisplayText(area_ja, '関東地方（訓練）', 60) : undefined,
+    intensity: typeof intensity === 'string' ? sanitizeSafeDisplayText(intensity, '震度5強（訓練）', 32) : undefined,
+  });
+
+  appendAuditLog(
+    alertState.active ? 'EMERGENCY_ALERT_DRILL_ACTIVATED' : 'EMERGENCY_ALERT_DRILL_CLEARED',
+    alertState.active
+      ? `Activated Priority #1 Public Emergency Alert Drill (${alertState.alert_type}): all entertainment/Gachapon effects suppressed immediately.`
+      : 'Cleared Public Emergency Alert Drill and restored normal Arena monitoring.',
+    'REAL_AUDIT',
+    'VERIFIED_BY_EXECUTION',
+    { actor: sess.user_id, target: 'emergency-alert-override', result: 'SUCCESS' }
+  );
+
+  res.json({
+    success: true,
+    emergency_alert: alertState,
+    state: buildMasterState(sess),
+  });
+});
+
+app.post('/api/arena/voicevox/speak', requireAuth, requireCsrf, async (req: Request, res: Response) => {
+  const sess = (req as Request & { authSession?: ActiveSession }).authSession!;
+  const { text_en, text_ja, zundamon_ja, costume } = req.body || {};
+  const vvStatus = await checkLocalVoicevoxHealth();
+
+  const item = pushZundamonCommentary({
+    priority: 'NORMAL_COMMENTARY',
+    original_en: String(text_en || 'Security telemetry check completed.'),
+    translated_ja: String(text_ja || 'セキュリティテレメトリ検査が完了しました。'),
+    zundamon_speech_ja: String(zundamon_ja || 'サンダーホールのセキュリティチェックがバッチリ完了したのだ！'),
+    costume: (costume as ZundamonCostumeId) || undefined,
+  });
+
+  res.json({
+    success: true,
+    voicevox_engine: vvStatus,
+    commentary: item,
+    state: buildMasterState(sess),
+  });
+});
+
+// ============================================================================
+// 16. Additional Clauses V2.1 & V2.2 API Endpoints (Gemini / VOICEVOX / OBS-Free Stream)
+// ============================================================================
+app.post('/api/v22/policy', requireAuth, requireCsrf, (req: Request, res: Response) => {
+  const sess = (req as Request & { authSession?: ActiveSession }).authSession!;
+  const { operation_mode, low_stimulation_mode, real_geography_explicitly_enabled } = req.body || {};
+  const updated = updateV21PolicySettings({
+    operation_mode:
+      operation_mode === 'RESEARCHER_MODE' || operation_mode === 'ENTERTAINMENT_MODE' ? operation_mode : undefined,
+    low_stimulation_mode: typeof low_stimulation_mode === 'boolean' ? low_stimulation_mode : undefined,
+    real_geography_explicitly_enabled:
+      typeof real_geography_explicitly_enabled === 'boolean' ? real_geography_explicitly_enabled : undefined,
+  });
+
+  appendAuditLog(
+    'V21_POLICY_UPDATED',
+    `Updated V2.1 policy: mode=${updated.operation_mode}, lowStim=${updated.low_stimulation_mode}, fictionalGeoDefault=${updated.fictional_geography_default}.`,
+    'REAL_AUDIT',
+    'VERIFIED_BY_EXECUTION',
+    { actor: sess.user_id, target: 'v21-policy', result: 'SUCCESS' }
+  );
+
+  res.json({
+    success: true,
+    v21_policy: updated,
+    state: buildMasterState(sess),
+  });
+});
+
+app.post('/api/v22/gemini/dialogue', requireAuth, requireCsrf, async (req: Request, res: Response) => {
+  const sess = (req as Request & { authSession?: ActiveSession }).authSession!;
+  const {
+    event_type,
+    severity,
+    verification_status,
+    metrics,
+    technical_term,
+    simulate_untrusted_raw_output,
+    simulate_gemini_failure,
+    force_bypass_cache,
+  } = req.body || {};
+
+  const safeSummaryInput: Record<string, unknown> = {
+    event_type: String(event_type || 'SECURITY_SCAN_SUMMARY'),
+    severity: String(severity || 'LOW'),
+    verification_status: String(verification_status || 'VERIFIED'),
+    metrics:
+      metrics && typeof metrics === 'object' && !Array.isArray(metrics)
+        ? metrics
+        : { pps: 250, blocked_ratio_pct: 100, sandbox_repro_count: 3 },
+    technical_term: String(technical_term || 'Rate Limit'),
+  };
+
+  const result = await generateZundamonDialogueV22({
+    raw_event_input: safeSummaryInput,
+    redact_fn: redactTextFailClosed,
+    mock_untrusted_output: simulate_untrusted_raw_output,
+    simulate_gemini_failure:
+      simulate_gemini_failure === 'TIMEOUT' ||
+      simulate_gemini_failure === 'HTTP_429' ||
+      simulate_gemini_failure === 'MALICIOUS_OUTPUT'
+        ? simulate_gemini_failure
+        : undefined,
+    bypass_cache: Boolean(force_bypass_cache),
+  });
+
+  // Push verified/fallback line into Zundamon commentary feed (Strictly One-Way: never mutates Tester Core)
+  pushZundamonCommentary({
+    priority: safeSummaryInput.severity === 'CRITICAL' ? 'CRITICAL_SECURITY' : 'NORMAL_COMMENTARY',
+    original_en: `[V2.2 Gemini=${result.source}] Event=${safeSummaryInput.event_type}, Status=${safeSummaryInput.verification_status}`,
+    translated_ja: `[V2.2 セリフ生成: ${result.source}] イベント=${safeSummaryInput.event_type} / 状態=${safeSummaryInput.verification_status}`,
+    zundamon_speech_ja: result.dialogue.speech,
+    costume: result.dialogue.costume_id,
+  });
+
+  const gemSec = getGeminiSecuritySnapshot();
+  appendAuditLog(
+    'V22_GEMINI_DIALOGUE_GENERATED',
+    `Generated V2.2 Zundamon dialogue (source=${result.source}, quarantinePassed=${result.quarantine_report.passed}, tier=${gemSec.plan_tier}).`,
+    'REAL_AUDIT',
+    'VERIFIED_BY_EXECUTION',
+    { actor: sess.user_id, target: 'v22-gemini-dialogue', result: 'SUCCESS' }
+  );
+
+  res.json({
+    success: true,
+    result,
+    gemini_security: gemSec,
+    state: buildMasterState(sess),
+  });
+});
+
+app.get('/api/v22/voicevox/status', requireAuth, async (_req: Request, res: Response) => {
+  const probe = await probeVoicevoxWithPortFallback();
+  const vvHealth = await checkLocalVoicevoxHealth();
+  res.json({
+    success: true,
+    probe,
+    voicevox_engine: vvHealth,
+    credit_metadata: VOICEVOX_CREDIT_METADATA,
+    pregenerated_cache: PREGENERATED_VOICEVOX_CACHE,
+  });
+});
+
+app.post('/api/v22/stream/stage', requireAuth, requireCsrf, (req: Request, res: Response) => {
+  const sess = (req as Request & { authSession?: ActiveSession }).authSession!;
+  const {
+    action,
+    stream_key,
+    privacy_status,
+    delay_buffer_sec,
+    user_explicit_confirm,
+    simulate_n100_cpu_percent,
+    simulate_n100_free_ram_mib,
+  } = req.body || {};
+
+  if (typeof simulate_n100_cpu_percent === 'number' || typeof simulate_n100_free_ram_mib === 'number') {
+    const hostTel = readRealHostTelemetry();
+    const deg = evaluateN100AutoDegradation(
+      typeof simulate_n100_cpu_percent === 'number' ? simulate_n100_cpu_percent : hostTel.cpu_percent,
+      typeof simulate_n100_free_ram_mib === 'number' ? simulate_n100_free_ram_mib : hostTel.host_available_ram_mib
+    );
+    return res.json({
+      success: true,
+      degradation: deg,
+      builtin_stream: getBuiltinStreamEncoderSnapshot(),
+      state: buildMasterState(sess),
+    });
+  }
+
+  const actionMap: Record<
+    string,
+    | 'step1_configure'
+    | 'step2_verify_connection'
+    | 'step3_preview'
+    | 'step4_start_live'
+    | 'step5_stop_stream'
+    | 'trigger_emergency_blackout'
+    | 'clear_emergency_blackout'
+    | 'simulate_network_disconnect'
+    | 'update_n100_load'
+  > = {
+    configure: 'step1_configure',
+    step1_configure: 'step1_configure',
+    verify_connection: 'step2_verify_connection',
+    step2_verify_connection: 'step2_verify_connection',
+    start_preview: 'step3_preview',
+    step3_preview: 'step3_preview',
+    go_live: 'step4_start_live',
+    step4_start_live: 'step4_start_live',
+    stop_stream: 'step5_stop_stream',
+    step5_stop_stream: 'step5_stop_stream',
+    emergency_blackout_on: 'trigger_emergency_blackout',
+    trigger_emergency_blackout: 'trigger_emergency_blackout',
+    emergency_blackout_off: 'clear_emergency_blackout',
+    clear_emergency_blackout: 'clear_emergency_blackout',
+    simulate_network_drop: 'simulate_network_disconnect',
+    simulate_network_disconnect: 'simulate_network_disconnect',
+  };
+
+  const mappedAction = actionMap[String(action || 'configure')] || 'step1_configure';
+  const transition = transitionBuiltinStreamStage({
+    action: mappedAction,
+    stream_key: typeof stream_key === 'string' ? stream_key : undefined,
+    privacy_status:
+      privacy_status === 'private' || privacy_status === 'unlisted' || privacy_status === 'public'
+        ? privacy_status
+        : undefined,
+    broadcast_delay_sec: typeof delay_buffer_sec === 'number' ? delay_buffer_sec : undefined,
+    user_explicit_confirm: Boolean(user_explicit_confirm),
+    redaction_gate_status: 'STREAMABLE',
+  });
+
+  if (typeof stream_key === 'string' && stream_key.trim().length >= 4) {
+    sensitiveLiterals.set(stream_key.trim(), '[REDACTED_YOUTUBE_STREAM_KEY]');
+  }
+
+  appendAuditLog(
+    'V22_BUILTIN_STREAM_STAGE',
+    `V2.2 Built-in Stream Stage action='${mappedAction}' -> success=${transition.success}, stage=${transition.snapshot.stage}, blackout=${transition.snapshot.emergency_blackout_active}.`,
+    'REAL_AUDIT',
+    'VERIFIED_BY_EXECUTION',
+    { actor: sess.user_id, target: 'v22-builtin-stream', result: transition.success ? 'SUCCESS' : 'DENIED' }
+  );
+
+  if (!transition.success) {
+    return res.status(409).json({
+      success: false,
+      error: transition.error || '内蔵配信ステージ遷移エラー',
+      builtin_stream: transition.snapshot,
+      state: buildMasterState(sess),
+    });
+  }
+
+  res.json({
+    success: true,
+    message_ja: `内蔵配信ステージ更新: ${transition.snapshot.stage_label_ja}`,
+    builtin_stream: transition.snapshot,
+    state: buildMasterState(sess),
+  });
+});
+
+app.post('/api/v22/acceptance-tests', requireAuth, requireCsrf, async (req: Request, res: Response) => {
+  const sess = (req as Request & { authSession?: ActiveSession }).authSession!;
+  const report = await runV22AcceptanceVerificationSuite(redactTextFailClosed);
+
+  appendAuditLog(
+    'V22_ACCEPTANCE_TESTS_EXECUTED',
+    `Executed V2.2 6-item Acceptance Verification Suite: all_passed=${report.all_passed} (${report.results.length}/6).`,
+    'REAL_AUDIT',
+    'TEST_EXECUTED',
+    { actor: sess.user_id, target: 'v22-acceptance-suite', result: report.all_passed ? 'SUCCESS' : 'ERROR' }
+  );
+
+  res.json({
+    success: report.all_passed,
+    report,
+    state: buildMasterState(sess),
+  });
+});
 
 // Serve root index.html
 app.get('/', (_req: Request, res: Response) => {

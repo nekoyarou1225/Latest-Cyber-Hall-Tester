@@ -1,6 +1,6 @@
 {
-  "summary":  "Implementation plan for the complete redesign of THUNDERHALL (サンダーホール) into a Neo-Cyberpunk SOC Multi-Pane Operations Center with the exact 32-tier plan architecture (general, business, research, group x 8 tiers), full server-side entitlement enforcement, and preservation of all 20 tester modules.",
-  "updatedAt":  "2026-11-02T07:39:30.467098303Z",
-  "requestFeedback":  true,
-  "userFacing":  true
+  "summary": "THUNDERHALL TESTER 追加条項 V2.1 および V2.2（Gemini API ずんだもんセリフ生成・4段階出力検疫・VOICEVOX ENGINE ローカル統合・OBS不要の5段階内蔵YouTubeライブ配信・S1〜S4段階実装・6項目自動検証スイート）の実装計画書",
+  "updatedAt": "2026-11-04T10:25:10.974463724Z",
+  "requestFeedback": true,
+  "userFacing": true
 }

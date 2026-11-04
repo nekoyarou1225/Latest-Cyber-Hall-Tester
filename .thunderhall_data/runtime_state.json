@@ -1,17 +1,17 @@
 {
   "payload": {
     "schema_version": "thunderhall.persistence.v2",
-    "saved_at": "2026-11-02T09:38:06.150Z",
+    "saved_at": "2026-11-04T10:47:16.834Z",
     "highest_monotonic_seq": 37,
     "revoked_license_ids": [],
     "daily_usage_sec": 0,
-    "last_usage_reset": "Mon Nov 02 2026",
+    "last_usage_reset": "Wed Nov 04 2026",
     "admin_policy_max_honeypots": 256,
     "current_oni_mode": "NORMAL",
     "encrypted_active_license": {
-      "iv": "194627d1705a258eb7454246",
-      "tag": "04ff518fa1c5d23a02d4ff712a3c4bfd",
-      "ciphertext": "5e76f8c4d23102c3f6b5e91302f92d6d8f2869f390a58fcda09820cfa3bf22ae53f4e780b72d541ceac6192568a001435c503bf9c3ef1b3fa9c74ac6011ffb748c25ef09d2ae4a7a607f584a66e754dba248dddba917a4eb0c2c5f9793af82cb531b02a176d03e5f749f9f53b8a38887b4018189104173577ee9c60af5c46b783eb7ed475fa825c25b09c5658ea72cf3c7d94b5d4e4e5be4214bb409808f433c6001c66d9b5c8885230bafaa8d72ee061e1409d3811be660f349720083351a8730a8ffba652a2a881f3c6e4defe4a376fb2711151ad6dfff1c8d36c7398d71033e188d806a8bd4b91a786b8fb40d95ece42d0047016bdac34faf6cac23edba61308e45070bbce1fa47dc2b5049a619c48d8782b44134cb2e67576c3165d0d0f3b22a083917a1987b89f7f799e6fd5378be8250f39aebf2f39a35601062e87691cc04685df71967065c249e9315809b7a98c7432fbafd325b3390f86b2988262a6eec98fa48d98f0a9c8b400c652dc282a4eac84015db45"
+      "iv": "610c0496f83ad88c8dbbde71",
+      "tag": "eaa68a4837b494cadad11d822789080d",
+      "ciphertext": "84f28c8e12f91e86a01d0ef078290bfd2975895375e598746d19024a82c131fc1d80234321750a83b5a5a0156d9d8c8e6227e910485700890679734605ff5016e350278ea360b32e510a0065d9fce11eeacba10170090b20e63cfa9053aaca96f0618874da1b706ecf2e84daa7a5ae8ce71ffe2363a1efcebb407e0da4606d612d39f59b125a07c41ee14011a5686aba2bfff40b064f7a9282d9c6613c342c3a19f34d89cefd1ac4bb65eb7338ae80b46cf1611e55285a2672ced0cb26a87c3647ab08eed555d896109b1ac71fcc843af2a6529775312b6e8f89ca055ba2486cd24f11b83b35c0e40d0c91488855a09481e85b99824c0ac1f9a735e7bb247e63567dcb61334a7748845adba38b77283727cbe2323eb4f16c7d325f83c8db12bd5ef179d0553024fc4aa76b342c326dd3a02eb2876dc854883d560d98ec1a757c1b90a3ce0a895749d33fe3c03bf93d1d912a97376c0c4bf62305f236f8bc68e4026b3623545a4ea64da31bd96fd9abdc5f8e67b501cce0"
     },
     "honeypot_nodes": [
       {
@@ -65,12 +65,12 @@
           {
             "user_id": "admin-alice",
             "role": "最高運用統括責任者 (FOUNDER)",
-            "added_at": "2026-11-02T09:37:45.779Z"
+            "added_at": "2026-11-04T10:47:00.131Z"
           },
           {
             "user_id": "admin-bob",
             "role": "暗号監査Quorum承認官",
-            "added_at": "2026-11-02T09:37:45.779Z"
+            "added_at": "2026-11-04T10:47:00.131Z"
           }
         ],
         "issued_licenses": []
@@ -84,50 +84,50 @@
         "pps": 250,
         "virtual_bots": "16",
         "created_by": "system",
-        "created_at": "2026-11-02T09:37:45.779Z"
+        "created_at": "2026-11-04T10:47:00.130Z"
       }
     ],
     "executed_kill_switch_events": [
-      "evt-quorum-3651"
+      "evt-quorum-2510"
     ],
     "kill_switch_records": [
       {
-        "event_id": "evt-quorum-3651",
+        "event_id": "evt-quorum-2510",
         "target_scope": "GLOBAL_SIM_AND_INGEST",
         "reason": "緊急隔離承認",
         "state": "VERIFIED",
         "requested_by": "admin-alice",
-        "created_at_epoch": 1793612283,
-        "expires_at_epoch": 1793613183,
+        "created_at_epoch": 1793789232,
+        "expires_at_epoch": 1793790132,
         "approvals": [
           {
             "approver_id": "admin-alice",
             "approver_display_name": "Alice (最高セキュリティ管理官 / Quorum承認官A)",
             "approver_role": "admin",
-            "session_fingerprint": "b91a17368891a454",
-            "approved_at_epoch": 1793612283,
-            "expires_at_epoch": 1793613183,
+            "session_fingerprint": "f1dd1f75757a9734",
+            "approved_at_epoch": 1793789232,
+            "expires_at_epoch": 1793790132,
             "target_scope": "GLOBAL_SIM_AND_INGEST",
             "reason": "緊急隔離承認",
-            "signature_ed25519": "7197f8a563b968b04c23a82c7028bf5359dc85892bd250a539ddc3ff63be5272dd5eecbc004f002b2ee8be31f01f55135cd7e1d2ae0a7f76093c308cdf34940a"
+            "signature_ed25519": "e45c74242ea0a4d0a26bee2e6614e314fb2b9f438b2ef7339f42c7b6ae1b1f4f9071b95fb16e156245800f25ca16beb43691855fbbb301917e9fcfa0b2a2e403"
           },
           {
             "approver_id": "admin-bob",
             "approver_display_name": "Bob (暗号監査管理官 / Quorum承認官B)",
             "approver_role": "admin",
-            "session_fingerprint": "a571cd3adc323a74",
-            "approved_at_epoch": 1793612283,
-            "expires_at_epoch": 1793613183,
+            "session_fingerprint": "65810227d51f5236",
+            "approved_at_epoch": 1793789232,
+            "expires_at_epoch": 1793790132,
             "target_scope": "GLOBAL_SIM_AND_INGEST",
             "reason": "緊急隔離承認",
-            "signature_ed25519": "3ec66008a24cc22e886f811daf644ded91ad50db1ee520b31b18a85344afc200929c7d0c02fec4d14cdd93b9a77f9e624d46c3a7b928e12b4a1322cb830b940d"
+            "signature_ed25519": "5a8de49f45382adf182379681130148b193a0dc154079e87670eaa60363e4d04e591103661ee70f9a9284215cf7c4d6b1fe7ee25895aa1c8f7997f0ad5db9702"
           }
         ],
-        "executed_at_epoch": 1793612283,
-        "verified_at_epoch": 1793612283,
+        "executed_at_epoch": 1793789232,
+        "verified_at_epoch": 1793789232,
         "verification_evidence": "VERIFIED: simSystemState=EMERGENCY_HALT, appliedPps=0, oni_mode=EMERGENCY_QUARANTINE"
       }
     ]
   },
-  "integrity_sha256": "44360087bde0429687b4bbf4491616115ee9ba93bbe232a39c3b26eb14382276"
+  "integrity_sha256": "84ec00d2a7a2e7150b25b6e5466a51eea06977f301757981038fa580a5fe90fc"
 }

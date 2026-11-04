@@ -1,0 +1,1848 @@
+# THUNDERHALL Tester — ULTIMATE GLOBAL CYBER BATTLE ARENA
+## MASTER INTEGRATED DEVELOPMENT PROMPT V2
+### Autonomous AI Security Intelligence / Zero-Day Candidate Discovery / Global 3D Cyber Battlefield / 10 Quadrillion-Scale Simulation / Physical Gachapon / 52 Effects / Zundamon AI Commentary / Emergency Intelligence / OBS Live Streaming
+
+---
+
+# 0. 総合開発ミッション
+
+対象製品：
+
+**THUNDERHALL Tester**
+
+プロジェクト名称：
+
+**THUNDERHALL GLOBAL CYBER INTELLIGENCE & BATTLE ARENA**
+
+本プロジェクトの目的は、THUNDERHALL Testerを、単純な脆弱性スキャナーではなく、テスト対象のシステムを理解し、弱点を発見し、安全な環境で検証できる高度なAIセキュリティテスターへ進化させることである。
+
+さらに、セキュリティ検査の過程を地球全体の3Dネットワークマップ、仮想ボット群、国際通信経路、衛星経路、物理演算ガラポン、ずんだもんの自動実況、ゲーム演出、ライブ配信へ統合する。
+
+## 目標とする主要機能
+
+1. AIによるテスト対象のシステム構造理解
+2. Attack Surfaceの自動発見
+3. 既知脆弱性の検査
+4. 未知の脆弱性候補・ゼロデイ候補の発見
+5. 隔離環境での安全な再現性・影響確認
+6. AIによる適応型セキュリティ検査
+7. 大規模仮想ボットネットワーク
+8. 地球全体の3Dネットワークマップ
+9. 国際中継・衛星通信経路の可視化
+10. 最大1京規模のボット・パケット集約シミュレーション
+11. 通信速度・攻撃平均スコア・遅延などの統計表示
+12. 3D物理演算ガラポン
+13. 緑・オレンジ・赤・金の4段階カプセル
+14. ずんだもんの衣装・表情・自動実況
+15. 52種類以上の演出
+16. VOICEVOX ENGINEのバックグラウンド統合
+17. OBSライブ配信
+18. 気象庁の地震・津波などの公式緊急情報
+19. J-Alert・国民保護などの公的緊急情報
+20. セキュリティ検査と防災情報を統合したライブダッシュボード
+
+**最重要原則：実際のセキュリティ検査の正確性を維持し、ゲーム演出・仮想通信・抽選結果によって検査結果を変更してはならない。**
+
+---
+
+# 1. SYSTEM UNDERSTANDING ENGINE
+
+## 1.1 テスト対象の自動理解
+
+Testerは、許可された情報から対象システムの構造と動作を理解する。
+
+分析対象：
+
+- OSの種類・バージョン
+- Kernelバージョン
+- CPUアーキテクチャ
+- メモリ構成
+- プログラミング言語
+- フレームワーク
+- ライブラリ
+- 依存パッケージ
+- サービス構成
+- ネットワーク構成
+- 通信プロトコル
+- API構造
+- 認証方式
+- 認可方式
+- データベース
+- ストレージ
+- 暗号化方式
+- Firewall
+- ログ管理
+- プロセス間通信
+- 仮想化環境
+- コンテナ環境
+- 更新・デプロイ機構
+
+情報が取得できない場合は、推測を確定情報として扱わず`UNKNOWN`として記録する。
+
+## 1.2 System Architecture Mapping
+
+対象システムの構造を自動で図式化する。
+
+- Frontend
+- Backend
+- API
+- Authentication
+- Authorization
+- Database
+- Storage
+- Network Interface
+- Firewall
+- Kernel
+- Services
+- External Dependencies
+- Trust Boundaries
+- Critical Assets
+
+各構成要素と接続関係を可視化する。
+
+## 1.3 Data Flow Understanding
+
+データの流れを追跡する。
+
+`User Input → API → Authentication → Business Logic → Database`
+
+各段階で以下を確認する。
+
+- 入力検証
+- データ型
+- 権限確認
+- 信頼境界
+- 暗号化
+- ログ出力
+- エラー処理
+- 出力処理
+- 機密データの取り扱い
+
+## 1.4 Trust Boundary Analysis
+
+次の境界を重点的に分析する。
+
+- 外部通信と内部通信
+- 一般ユーザーと管理者
+- FrontendとBackend
+- APIとDatabase
+- ホストとコンテナ
+- VMとホスト
+- COREとデコイ
+- 信頼済みモジュールと未信頼モジュール
+
+---
+
+# 2. AUTONOMOUS ATTACK SURFACE DISCOVERY
+
+## 2.1 攻撃対象領域の自動抽出
+
+- 公開API
+- 内部API
+- 認証エンドポイント
+- ファイルアップロード
+- ファイルダウンロード
+- 外部入力処理
+- ネットワークポート
+- サービス間通信
+- IPC
+- データベース接続
+- シリアライズ処理
+- 権限変更処理
+- 更新機構
+- 管理者インターフェース
+- ログ管理
+
+## 2.2 Attack Surface Map
+
+各項目に以下を記録する。
+
+- `asset_id`
+- `component`
+- `entry_point`
+- `protocol`
+- `trust_boundary`
+- `required_privilege`
+- `input_types`
+- `related_component`
+- `risk_level`
+- `verification_status`
+
+## 2.3 攻撃経路分析
+
+- 外部入力から内部処理への経路
+- 一般ユーザーから管理機能への権限境界
+- サービス間の信頼関係
+- データベースアクセス経路
+- ファイル操作経路
+- ネットワーク境界
+- 認証と認可の関係
+
+複数の弱点が組み合わさった場合のリスクも分析する。
+
+---
+
+# 3. AI-POWERED VULNERABILITY DISCOVERY
+
+## 3.1 既知脆弱性検査
+
+照合対象：
+
+- CVE
+- CWE
+- OWASP関連リスク
+- CERT関連情報
+- 依存ライブラリの脆弱性
+- 設定不備
+- 暗号設定の弱点
+- 認証・認可の欠陥
+
+バージョン一致だけで脆弱性ありと断定しない。
+
+実際の設定・使用状況・適用済み修正を確認する。
+
+## 3.2 Static Analysis
+
+- ソースコード構造解析
+- Data Flow Analysis
+- Control Flow Analysis
+- Taint Analysis
+- メモリ管理
+- 整数境界
+- 入力検証
+- 例外処理
+- 権限境界
+- 暗号処理
+- 並行処理
+- リソース解放
+
+## 3.3 Dynamic Analysis
+
+許可された隔離環境で実行する。
+
+- 実行時エラー
+- 例外
+- 異常終了
+- メモリ異常
+- 状態遷移の不整合
+- タイムアウト
+- リソース枯渇
+- API応答異常
+- 認証状態の不整合
+- 権限検証の不一致
+
+## 3.4 Fuzz Testing
+
+- Boundary-value Fuzzing
+- Structure-aware Fuzzing
+- Protocol State-machine Fuzzing
+- Property-based Testing
+- Differential Testing
+- Mutation Testing
+- Coverage-guided Fuzzing
+
+合成データを使用し、再現可能な最小テストケースを生成する。
+
+## 3.5 Logic Vulnerability Discovery
+
+- 認証と認可の不一致
+- 不正な状態遷移
+- 競合状態
+- TOCTOU
+- 信頼境界の不整合
+- 権限継承の欠陥
+- セッション管理の欠陥
+- トランザクション不整合
+- ロールバックの欠陥
+- 情報漏えい
+- 不適切なエラー処理
+
+---
+
+# 4. UNKNOWN VULNERABILITY / ZERO-DAY CANDIDATE ENGINE
+
+## 4.1 未知の脆弱性候補検出
+
+既知CVEだけに依存せず、独自のコード解析・動作分析から未知の弱点を探す。
+
+- 新規実装のロジック不備
+- 独自プロトコルの解析ミス
+- 未知の入力処理欠陥
+- 状態遷移の矛盾
+- 競合状態
+- メモリ安全性
+- 権限境界の不整合
+- 情報漏えい経路
+- 暗号実装の境界条件
+- 複数コンポーネント間の問題
+
+## 4.2 分類
+
+- `KNOWN_CVE`
+- `KNOWN_CWE`
+- `UNKNOWN_VULNERABILITY_CANDIDATE`
+- `POTENTIAL_ZERO_DAY`
+- `CONFIRMED_VULNERABILITY`
+- `FALSE_POSITIVE`
+- `UNVERIFIED`
+
+CVE未登録だけでゼロデイと断定しない。
+
+## 4.3 安全な再現性検証
+
+1. 発見箇所の特定
+2. 入力条件の整理
+3. 原因分析
+4. 隔離環境での再現
+5. 最小再現テスト
+6. 影響範囲評価
+7. 修正前後比較
+8. 回帰テスト
+9. 証拠保存
+
+合成データ・専用アカウント・カナリアファイル・ダミー識別子・隔離環境を利用する。
+
+無許可の侵入、実データ窃取、外部永続化、検知回避、横展開、破壊的な実行は行わない。
+
+## 4.4 AI Adaptive Testing
+
+AIは検査結果に基づき、次の検査方法を提案する。
+
+実行は独立したポリシーエンジンが許可範囲・対象・時間・リソース・安全性を確認してから行う。
+
+AIが独断で検査対象を拡張しない。
+
+---
+
+# 5. AUTONOMOUS TESTING WORKFLOW
+
+1. テスト対象と許可範囲を確認
+2. システム構造を理解
+3. Attack Surface Map生成
+4. Critical Assets分類
+5. リスク評価
+6. 既知脆弱性検査
+7. 静的解析
+8. 動的解析
+9. 安全なFuzz Testing
+10. 未知脆弱性候補分析
+11. 安全な再現性確認
+12. 影響評価
+13. 検査レポート作成
+14. 修正案生成
+15. 修正後の回帰テスト計画
+
+検査対象・操作・時間・リソースの範囲を決定論的なポリシーエンジンで制限する。
+
+---
+
+# 6. ADAPTIVE LEARNING & KNOWLEDGE
+
+保存対象：
+
+- システム構造
+- 検査履歴
+- 発見した弱点
+- 誤検知
+- 未検証の仮説
+- 修正済み脆弱性
+- 回帰テスト
+- 依存関係
+- セキュリティポリシー
+
+認証情報・秘密鍵・本番機密情報を無断で学習データに含めない。
+
+過去の知識が現在の対象バージョンにも適用できるか確認する。
+
+---
+
+# 7. BOT ARENA SIMULATION ENGINE
+
+## 7.1 基本仕様
+
+名称：
+
+`THUNDERHALL BOT ARENA SIMULATOR`
+
+仮想ボットを生成し、ネットワーク上の動きをリアルタイムで再現する。
+
+すべて隔離されたシミュレーション環境で動作させる。
+
+実際の第三者ネットワークへの攻撃や実在のボットネット利用は禁止する。
+
+## 7.2 Bot情報
+
+各Botに以下を割り当てる。
+
+- Bot ID
+- Bot Name
+- IPv4
+- IPv6
+- MAC
+- OS Profile
+- Protocol
+- Source Port
+- Destination Port
+- Packet Rate
+- Traffic Volume
+- Latency
+- Threat Score
+- Attack Stage
+- Current Target
+- Status
+
+## 7.3 仮想IP
+
+IPv4：
+
+- `192.0.2.0/24`
+- `198.51.100.0/24`
+- `203.0.113.0/24`
+
+IPv6：
+
+- `2001:db8::/32`
+
+実在する第三者のIPを仮想ボットに割り当てない。
+
+## 7.4 仮想MAC
+
+ローカル管理・ユニキャスト形式を使用する。
+
+例：
+
+`02:AA:00:00:00:01`
+
+Botごとに重複しないMACを生成する。
+
+## 7.5 Bot種類
+
+- `SCANNER_BOT`
+- `RECON_BOT`
+- `BRUTE_FORCE_SIM_BOT`
+- `WEB_PROBE_BOT`
+- `NETWORK_MAPPING_BOT`
+- `LATERAL_MOVEMENT_SIM_BOT`
+- `EXFILTRATION_SIM_BOT`
+- `DECOY_INTERACTION_BOT`
+- `UNKNOWN_BEHAVIOR_BOT`
+
+すべて安全な仮想行動モデルとする。
+
+## 7.6 Botステージ
+
+1. `SPAWN`
+2. `DISCOVERY`
+3. `RECONNAISSANCE`
+4. `OUTER_PERIMETER_APPROACH`
+5. `OUTER_PERIMETER_ENTRY`
+6. `OUTER_HONEYPOT`
+7. `INNER_PERIMETER_APPROACH`
+8. `INNER_HONEYPOT`
+9. `SECURITY_CONTROL_TEST`
+10. `BLOCKED` または `QUARANTINED`
+11. `SIMULATION_COMPLETE`
+
+---
+
+# 8. GLOBAL EARTH-SCALE CYBER BATTLEFIELD
+
+## 8.1 地球全体の3Dマップ
+
+世界全体を再現した巨大な3D地球マップを実装する。
+
+必要機能：
+
+- 地球全体の3D表示
+- 大陸・国境・国名
+- 国・地域・都市名
+- 都道府県・州などの行政区域
+- 海洋
+- 国際通信経路
+- 海底ケーブルの概略表示
+- 仮想データセンター
+- 仮想サーバー拠点
+- 衛星軌道
+- 仮想ボットの位置
+- 通信経路
+- イベントの着弾地点
+
+候補技術：
+
+- Three.js
+- CesiumJS
+- WebGL
+- 3D Globe Rendering
+- Geographic Coordinate System
+
+既存構成との互換性を確認して選択する。
+
+## 8.2 Bot数に応じた表示方式
+
+| Bot数 | 表示方式 |
+|---:|---|
+| 1〜100 | 個別表示 |
+| 101〜10,000 | 個別アイコン＋経路集約 |
+| 10,001〜1,000,000 | 地域別クラスタ |
+| 1,000,001〜1,000,000,000 | 国別・都市別ヒートマップ |
+| 1,000,000,001以上 | 大規模統計集約 |
+| 10,000,000,000,000,000 | 1京規模集約表示 |
+
+1京規模では1体ずつ3Dオブジェクトを生成しない。
+
+- GPU Instancing
+- LOD
+- Clustering
+- Statistical Aggregation
+- Heatmap
+- Hierarchical Rendering
+
+を利用する。
+
+実際の処理能力をベンチマークし、理論上限と実測値を区別する。
+
+---
+
+# 9. GLOBAL ATTACK ROUTE VISUALIZATION
+
+## 9.1 国際通信経路
+
+例：
+
+`USA → France → China → Japan`
+
+ほかの仮想ルート：
+
+- USA → Japan
+- USA → UK → Japan
+- Germany → Singapore → Japan
+- China → South Korea → Japan
+- Brazil → USA → Japan
+- Australia → Singapore → Japan
+- India → Singapore → Japan
+
+各経路に以下を表示する。
+
+- 出発国
+- 中継地点
+- 到着国
+- Relay ID
+- 仮想IP
+- 仮想MAC
+- 仮想RTT
+- 仮想通信量
+- 経由回数
+- 到達状態
+
+実際に確認した経路と演出用の仮想経路を区別する。
+
+IPアドレスの地理情報だけから通信経路や攻撃者の所在地を断定しない。
+
+## 9.2 曲線状通信エフェクト
+
+通信経路は直線ではなく、地球の曲率に沿った半円状・弧状の軌道として表示する。
+
+1. 出発地点から光の粒子が発射
+2. 地球表面から浮き上がった弧を描く
+3. 経路上を光が移動
+4. 中継地点で一時停止・分岐
+5. 最終目的地に到達
+6. 着弾地点に円形波紋が拡大
+7. 外側に光のリング
+8. カメラが着弾地点へ接近
+9. Bot情報を表示
+
+色：
+
+- 青：通常通信
+- 緑：正常通信
+- 黄：注意
+- オレンジ：疑わしい通信
+- 赤：高危険度イベント
+- 紫：隔離・解析中
+- 金：特別演出
+
+シミュレーション演出には`SIMULATED`を明示する。
+
+## 9.3 日本への着弾地点
+
+表示候補：
+
+- 東京都
+- 大阪府
+- 愛知県
+- 福岡県
+- 北海道
+- 沖縄県
+- その他の都道府県
+
+通常は都市・地域・データセンターなど大まかな場所を表示する。
+
+まれなイベントでは都道府県単位の特別演出を行う。
+
+ただし、実際の観測精度が低い場合に都道府県を実測位置として断定しない。
+
+## 9.4 着弾波紋
+
+- 中心点発光
+- 円形波紋拡大
+- 地表の光のリング
+- カメラ接近
+- Bot情報パネル
+- 防衛結果表示
+
+防御成功ならシールドを展開し、通信経路遮断演出を行う。
+
+---
+
+# 10. PROXY / RELAY / SATELLITE ROUTE SIMULATION
+
+## 10.1 多段中継
+
+以下の経路をシミュレーションする。
+
+`USA → France Relay → China Relay → Japan`
+
+対応モデル：
+
+- Proxy Server
+- Reverse Proxy
+- VPN Exit Node
+- Cloud Relay
+- Compromised Host Simulation
+- Jump Server
+- Multi-Hop Relay
+
+第三者サーバーを踏み台として実際に利用してはならない。
+
+すべてローカルの仮想ネットワーク内で再現する。
+
+実際の通信経路が確認できない場合は、推定・仮想経路として表示する。
+
+## 10.2 Satellite Route
+
+仮想衛星通信経路を追加する。
+
+例：
+
+`USA Ground Station → Satellite → Relay Station → Japan`
+
+表示要素：
+
+- 仮想衛星
+- 軌道
+- 地上局
+- 通信ビーム
+- 仮想遅延
+- 中継経路
+- 日本への着弾
+
+衛星が地球の周囲を移動しているように描画する。
+
+実際に衛星通信を使用していない場合は`SIMULATED SATELLITE ROUTE`と明示する。
+
+---
+
+# 11. REALISTIC GLOBAL CAMERA ENGINE
+
+## 11.1 カメラワーク
+
+- Earth Overview
+- Global Rotation
+- Country Zoom
+- City Zoom
+- Attack Origin Focus
+- Relay Follow Camera
+- Satellite Tracking Camera
+- Destination Lock
+- Impact Close-up
+- Wide Battlefield View
+- Slow Motion
+- Cinematic Orbit
+- Smooth Transition
+- Automatic Camera Director
+
+## 11.2 自動カメラ
+
+通常Bot：
+
+地球の広域表示。
+
+複数Bot：
+
+攻撃元地域をズームし、経路を追跡。
+
+多段中継：
+
+中継地点を順番に追跡。
+
+金カプセル：
+
+着弾地点をズームし、カプセル演出。
+
+本丸イベント：
+
+地球全体から日本へ移動し、COREを中心に表示。
+
+重要イベントのテキスト・警告・検査情報をカメラで隠さない。
+
+---
+
+# 12. ONE QUADRILLION SCALE ARCHITECTURE
+
+## 12.1 設計上の最大ボット数
+
+`10,000,000,000,000,000`
+
+**1京体**
+
+## 12.2 設計上の最大パケット数
+
+`10,000,000,000,000,000`
+
+**1京パケット**
+
+これはシミュレーションの総パケット数上限とする。
+
+1京パケット/秒という実測性能を意味しない。
+
+PPSや通信速度は別々の測定値とする。
+
+## 12.3 1京規模の実装方式
+
+全ボット・全パケットを個別生成しない。
+
+以下で統計的に集約する。
+
+- 地域別集約カウンター
+- 国別クラスタ
+- 通信量ヒートマップ
+- 統計的イベントモデル
+- GPUインスタンシング
+- 階層型LOD
+- 分散シミュレーション
+- 集約パケットカウンター
+
+実際の計算資源と処理能力は別途ベンチマークする。
+
+## 12.4 数値精度
+
+1京という数値を正確に扱うため、整数カウンターを使用する。
+
+JavaScriptの通常の`Number`だけに依存して1京を加算・比較しない。
+
+- `BigInt`
+- UInt64相当の安全な整数処理
+- 10進文字列によるシリアライズ
+- オーバーフロー検査
+
+を採用する。
+
+JSONでの数値精度損失を防止する。
+
+## 12.5 特殊表示
+
+- `BOT COUNT: UNMEASURABLE`
+- `PACKET VOLUME: UNBOUNDED`
+- `GLOBAL SWARM DETECTED`
+- `COUNTER LIMIT REACHED`
+- `SCALE EXCEEDED`
+- `QUADRILLION CLASS`
+- `BEYOND MEASUREMENT`
+- `EXTREME DENSITY`
+- `GLOBAL EVENT`
+- `UNKNOWN SCALE`
+
+測定できない場合のみUNMEASURABLEを表示する。
+
+測定値が分かっているのに、演出目的で測定不能と偽装してはならない。
+
+実際の最大数・現在数・理論上限・集約推定数を別々に表示する。
+
+実ネットワークへ1京パケットを送信する機能を実装しない。
+
+---
+
+# 13. GLOBAL STATISTICS & LIVE TELEMETRY
+
+## 13.1 表示項目
+
+- Bot総数
+- 攻撃平均スコア
+- 最大脅威スコア
+- 通信速度
+- RX
+- TX
+- PPS
+- BPS
+- Mbps
+- Gbps
+- Tbps
+- 通信遅延
+- 平均RTT
+- パケット損失率
+- ブロック数
+- 隔離数
+- 検査済み通信量
+- 検査時間
+- 防御成功率
+- 誤検知率
+- 未知脆弱性候補数
+
+## 13.2 攻撃平均スコア
+
+基本計算：
+
+`Average = Sum(Valid Threat Scores) / Count(Valid Threat Scores)`
+
+別々のスコアを混同しない。
+
+- Bot Threat Score
+- Packet Threat Score
+- Session Threat Score
+- Attack Campaign Score
+- Overall Average Threat Score
+
+AIスコアは脆弱性の確定判定とは別に扱う。
+
+## 13.3 通信速度
+
+表示例：
+
+```text
+CURRENT RX       : 12.4 Gbps
+CURRENT TX       : 8.2 Gbps
+AGGREGATE PPS    : 15,200,000
+AVERAGE RTT      : 24 ms
+PACKET LOSS      : 0.02%
+```
+
+実測値とシミュレーション値を明確に区別する。
+
+RXとTXを合算して片方向の実効速度として表示しない。
+
+実際の測定対象・計測期間・単位を明示する。
+
+## 13.4 ずんだもん統計実況
+
+「現在の仮想Bot数は10万体なのだ！」
+
+「平均脅威スコアは82.7！ かなり危険なのだ！」
+
+「現在の通信速度は12.4ギガビット毎秒なのだ！」
+
+「通信遅延は24ミリ秒なのだ！」
+
+「現在は3つの仮想中継地点を経由しているのだ！」
+
+「日本の防衛ラインに到達したのだ！」
+
+取得できない数値を推測して読み上げない。
+
+---
+
+# 14. JAPANESE-FIRST COMMENTARY & TRANSLATION
+
+## 14.1 対象視聴者
+
+小学生・中学生・高校生・大学生・一般視聴者が理解できる配信にする。
+
+難しい英語や専門用語をそのまま読み上げない。
+
+## 14.2 自動翻訳
+
+画面上の英語と日本語を同時に表示する。
+
+例：
+
+`GLOBAL BOT SWARM DETECTED`
+
+「世界規模の仮想Bot群を検知したのだ！」
+
+`SATELLITE RELAY DETECTED`
+
+「衛星中継ルートが確認されたのだ！」
+
+`CRITICAL SECURITY EVENT`
+
+「重大なセキュリティイベントなのだ！」
+
+## 14.3 用語解説
+
+- Proxy：通信を中継するサーバー
+- Packet：ネットワーク上のデータの小さな単位
+- Latency：通信の遅延
+- RTT：往復通信にかかる時間
+- DPI：通信の構造や内容を詳しく調べる技術
+- Honeypot：攻撃者の動きを観察するための囮環境
+- Zero-Day：修正や対策がまだ整っていない未知の脆弱性に関係する問題
+
+専門用語の意味を短い日本語で説明する。
+
+---
+
+# 15. GACHAPON PHYSICAL ENGINE
+
+## 15.1 3Dガラポン
+
+- 大型透明ドラム
+- 金属製フレーム
+- 回転ハンドル
+- カプセル排出口
+- 回収トレイ
+- 内部LED
+- THUNDERHALLロゴ
+
+## 15.2 物理演算
+
+候補：
+
+- Three.js
+- Rapier
+- Cannon-es
+- WebGL
+
+必要動作：
+
+- 重力
+- 衝突
+- 反発
+- 回転
+- 摩擦
+- 落下
+- 開封
+
+単なる動画再生ではなく、剛体物理演算によって動く。
+
+## 15.3 正式カプセル4種類
+
+| 色 | ランク | 演出レベル |
+|---|---|---|
+| 緑 | COMMON | 通常 |
+| オレンジ | RARE | 強化 |
+| 赤 | EPIC | 大規模 |
+| 金 | LEGENDARY / MYTHIC | 最上位 |
+
+青は通常迎撃専用のミニカプセルとして追加する。
+
+黄色はフラッシュ演出専用とする。
+
+金カプセルを正式ランクの最上位として維持する。
+
+---
+
+# 16. ずんだもん自動実況 ENGINE
+
+## 16.1 VOICEVOX統合
+
+VOICEVOXデスクトップアプリを別途起動させず、THUNDERHALL Tester側でVOICEVOX ENGINEをバックグラウンド管理する。
+
+必要機能：
+
+- Engine起動
+- 音源モデル管理
+- 話者ID取得
+- 音声合成
+- 音声キャッシュ
+- 音声キュー
+- 字幕同期
+- 音量管理
+- 異常時フォールバック
+
+ローカルAPIの例：
+
+`127.0.0.1:50021`
+
+ポート衝突を検知し、APIを外部ネットワークへ公開しない。
+
+エンジンと音源モデルのライセンス条件を個別に確認する。
+
+## 16.2 衣装
+
+| ランク | 衣装 |
+|---|---|
+| 緑 | ベーシック |
+| オレンジ | メカニック |
+| 赤 | サイバー戦術 |
+| 金 | ゴールドプレミア |
+| レーダー | スキャンオペレーター |
+| スナイパー演出 | スコープゴーグル付き衣装 |
+
+表情・ポーズ・字幕・音声を連動させる。
+
+## 16.3 自動実況
+
+イベントから台詞を選択する。
+
+- イベント種類
+- 重大度
+- Bot数
+- 侵入ステージ
+- カプセル色
+- 期待度
+- 演出ID
+- 防御結果
+- コンボ数
+- 通信速度
+- 平均脅威スコア
+- 緊急情報
+
+同じ台詞を短時間で繰り返さない。
+
+未信頼データをそのままずんだもんに読み上げさせない。
+
+英語・専門用語は日本語に翻訳して解説する。
+
+---
+
+# 17. EXPECTATION & JACKPOT SYSTEM
+
+期待度別の演出確率を維持する。
+
+| ランク | 期待度 | 出現率 |
+|---|---|---:|
+| NORMAL | ★☆☆☆☆ | 80.0% |
+| CHANCE | ★★☆☆☆ | 15.0% |
+| HOT | ★★★★☆ | 4.0% |
+| JACKPOT | ★★★★★ | 0.9% |
+| PREMIUM FREEZE | ∞ | 0.1% |
+| 合計 | | 100.0% |
+
+演出の抽選は、実際のセキュリティ結果が確定した後に行う。
+
+イベント種別に適合する演出だけを選択する。
+
+大当りは防御成功、メモリガードなど所定の実イベントに対応させる。
+
+抽選によって脆弱性重大度・防御成功・検査結果を変更しない。
+
+出現率は適格イベント内の演出選択比率として扱い、条件を満たさないイベントを無理に高ランクへ変更しない。
+
+---
+
+# 18. 52種類の演出カタログ
+
+既存30演出・追加18演出・フェイク4演出を統合し、以下のIDを維持する。
+
+## A. ネットワーク演出
+
+1. `BOOT SEQUENCE` — システム起動
+2. `RADAR SWEEP` — 円形レーダー
+3. `SONAR PULSE` — 同心円スキャン
+4. `BOT REVEAL` — 仮想ボット表示
+5. `TARGET LOCK` — 仮想ターゲットのロックオン
+6. `NETWORK GRID REVEAL` — 3Dネットワーク表示
+7. `PACKET STREAM` — 通信粒子
+8. `BOT SWARM ARRIVAL` — ボット群出現
+
+## B. 防衛ライン演出
+
+9. `OUTER PERIMETER ALERT` — 外郭警報
+10. `INNER PERIMETER ALERT` — 内郭警報
+11. `FIREWALL SHIELD` — 防御シールド
+12. `DECOY BREACH` — デコイ侵入
+13. `LASER BARRIER` — レーザー防衛線
+14. `SECURITY SIREN` — 警報
+15. `GLITCH DISTORTION` — デジタルノイズ
+16. `SLOW MOTION` — スローモーション
+
+## C. ガラポン演出
+
+17. `GACHAPON APPEARANCE`
+18. `GACHAPON SPIN`
+19. `CAPSULE COLLISION`
+20. `CAPSULE DROP`
+21. `CAPSULE BOUNCE`
+22. `GOLDEN CAPSULE REVEAL`
+23. `CAPSULE OPENING`
+24. `JACKPOT BURST`
+
+## D. 防衛・スナイパー演出
+
+25. `SNIPER SCOPE INTRO`
+26. `SNIPER HEADSHOT`
+27. `BOT ELIMINATION`
+28. `CORE BREACH WARNING`
+29. `CORE SCAN RADAR`
+30. `FINAL BATTLE SEQUENCE`
+
+スナイパー演出は仮想ボットの画面上の無力化に限定する。
+
+## E. 期待度別演出
+
+### NORMAL — 80%
+
+31. `BLUE CAPSULE DROP` — 青カプセル1〜3個
+32. `YELLOW FLASH` — 黄色フラッシュ・DROP表示
+33. `NORMAL CUT-IN` — ずんだもん通常カットイン
+
+### CHANCE — 15%
+
+34. `PSEUDO RUSH` — 連撃×1・×2・×3
+35. `ENTROPY WARNING` — 黄色警告と波形
+36. `RADAR SEARCH` — ターゲットサーチ
+
+### HOT — 4%
+
+37. `RED FLAME CUT-IN` — 赤炎カットイン
+38. `CAPSULE RAIN 30` — カプセル30個
+39. `DANGER PATTERN` — 独自DANGER柄
+40. `DPI SCAN` — 赤色スキャンライン
+
+### JACKPOT — 0.9%
+
+41. `RAINBOW CONFIRMED` — 虹色フラッシュ
+42. `CAPSULE FEVER 100` — カプセル100個
+43. `ZEROIZATION HAMMER` — ゼロ化演出
+44. `ULTRA SECURITY MODE` — EAL7風演出
+45. `ALL-ROTATION 777` — 777全回転
+
+EAL7風演出は正式認証取得を意味しない。
+
+### PREMIUM FREEZE — 0.1%
+
+46. `GOLDEN LONG FREEZE` — 3秒間の静寂と黄金ずんだもん
+47. `COURTROOM OBJECTION` — 独自の法廷ゲーム風「異議あり！」
+48. `FAKE KERNEL PANIC` — 架空Kernel Panic風ドッキリ
+
+## F. フェイク・逆転演出
+
+49. `ROOT PRIVILEGE TAKEOVER`
+
+- 架空のRoot昇格ログ
+- 赤い警告
+- 約3秒後の反転
+- ずんだもん登場
+- 虹色反転
+- サンドボックス隔離演出
+- 大量カプセル
+
+実際のroot昇格やOSコマンド実行は禁止。
+
+50. `SECRET DATA LEAK`
+
+- 架空ファイル名
+- 98% → 99% → 100%
+- くす玉
+- ずんだもんのダミー壁紙
+- 虹色演出
+
+実ファイル・秘密鍵・認証情報の読み取りや外部送信は禁止。
+
+51. `STREAM FREEZE`
+
+- OBS Browser Source内だけの停止風表示
+- 読み込みアイコン
+- 演出上の静寂
+- ガラス破壊演出
+- ずんだもん登場
+- カプセル50個
+
+OBS本体・エンコーダー・配信接続を停止しない。
+
+52. `BLUE SCREEN REVERSAL`
+
+- 架空の停止画面
+- 進捗100%
+- 画面分解
+- 黄金ステージ
+- メモリガード演出
+
+実OSの障害やKernel Panicは発生させない。
+
+---
+
+# 19. 本丸突破時の特別イベント
+
+イベント：
+
+- `SIMULATED_CORE_BREACH`
+- `VERIFIED_CORE_BOUNDARY_BREACH`
+
+## 19.1 特別シーケンス
+
+1. 通常ガラポンを中断
+2. 画面暗転
+3. 大型スキャンレーダー起動
+4. 全方向スキャン
+5. Bot群の位置表示
+6. CORE境界を赤色に強調
+7. Bot IDと識別情報表示
+8. ずんだもんをレーダー衣装へ変更
+9. 仮想ターゲットのロックオン
+10. 仮想迎撃成功時だけHEADSHOT演出
+11. 実際のCORE検証状態を独立表示
+12. 最終レポート
+
+実際のCORE侵害をゲーム演出で隠してはならない。
+
+---
+
+# 20. FAKE BREACH REVERSAL SYSTEM
+
+既存のフェイク演出49〜52を維持する。
+
+追加条件：
+
+- Root Takeoverは画面だけ。
+- Data Leakはダミーデータだけ。
+- Stream FreezeはBrowser Sourceだけ。
+- BSoDは架空表示だけ。
+- 実際のシステム状態を変更しない。
+- 本物の障害ではドッキリを中断する。
+- 実際のCORE侵害が確認された場合は正確な警告を優先する。
+
+---
+
+# 21. PUBLIC EMERGENCY ALERT SYSTEM
+
+## 21.1 基本仕様
+
+配信中に公的な緊急情報が発表された場合、セキュリティ演出とは独立した緊急情報レイヤーで通知する。
+
+対象：
+
+- 地震
+- 緊急地震速報
+- 津波
+- 気象警報
+- 特別警報
+- 台風
+- 火山情報
+- 弾道ミサイル発射情報
+- J-Alert
+- 国民保護情報
+- 避難情報
+- その他の公式緊急情報
+
+## 21.2 気象庁連携
+
+日本国内の地震・津波・気象情報は気象庁の公式情報を優先する。
+
+確認する情報：
+
+- 発表元
+- 発表時刻
+- 更新時刻
+- 地震発生時刻
+- 震央
+- マグニチュード
+- 最大震度
+- 津波情報
+- 対象地域
+- 解除情報
+- 公式情報URL
+
+公開データの提供条件・利用規約・更新間隔を確認する。
+
+非公式APIを公式情報として扱わない。
+
+データ取得に失敗した場合は、古い情報を最新情報として表示しない。
+
+## 21.3 地震情報の表示
+
+地震情報を受信した場合：
+
+1. 受信時刻を記録
+2. 発表元を確認
+3. 発生時刻を表示
+4. 震央を表示
+5. マグニチュードを表示
+6. 最大震度を表示
+7. 津波情報を表示
+8. 対象地域を表示
+9. 公式情報リンクを表示
+10. ずんだもんが注意喚起
+11. ゲーム演出の優先順位を下げる
+
+実況例：
+
+「緊急のお知らせなのだ。気象庁から地震情報が発表されたのだ。対象地域の方は公式情報を確認して、安全を優先するのだ！」
+
+## 21.4 国際安全保障情報
+
+ICBM・弾道ミサイル・J-Alert・国民保護などの情報は、公的な公式発表を優先する。
+
+実際に公表された情報と架空のシミュレーションを区別する。
+
+公式情報に存在しない発射カウントダウン・到達時間・着弾予測を生成しない。
+
+架空のミサイル演出は常に`SIMULATION`と表示する。
+
+## 21.5 緊急情報の優先順位
+
+1. 実際の災害・J-Alert・国民保護などの重大情報
+2. 実際の重大セキュリティインシデント
+3. 実際のシステム障害
+4. 通常のセキュリティ検査
+5. Bot Arena
+6. ガラポン・ゲーム演出
+
+緊急事態では爆音・フラッシュ・フェイク障害・スナイパー演出を停止または縮小する。
+
+災害情報をギャンブル演出や煽りの対象にしない。
+
+---
+
+# 22. EMERGENCY SOURCE VALIDATION
+
+緊急情報について以下を検証する。
+
+- 情報源
+- 発表機関
+- 発表時刻
+- 更新時刻
+- イベントID
+- 情報の種類
+- 対象地域
+- 有効期限
+- 重複通知
+- 解除情報
+- 取得失敗
+- キャッシュの鮮度
+
+複数の公式情報を照合できる場合は照合する。
+
+信頼性を確認できない情報は未確認として表示する。
+
+緊急情報取得機能が停止してもセキュリティ検査を停止させない。
+
+---
+
+# 23. ENGAGEMENT ENGINE
+
+視聴者の満足度を高める。
+
+目標とする体験：
+
+- 期待感
+- 緊張感
+- 意外性
+- 達成感
+- 逆転演出
+- 希少演出
+- コレクション
+- スコア
+- コンボ
+- 技術学習
+
+実際のドーパミン分泌を保証するものではない。
+
+過度な依存を誘発する設計を避ける。
+
+低刺激モード・音量調整・字幕・演出OFFを提供する。
+
+## 23.1 視聴者参加
+
+- 次の防衛層予想
+- カプセル色予想
+- 防衛側応援
+- Bot動向予想
+- セキュリティクイズ
+- 検査結果予想
+
+視聴者入力は演出や予想にのみ使用する。
+
+実際の検査・防御・隔離操作に影響させない。
+
+金銭を賭ける機能や換金可能なランダム報酬を設けない。
+
+---
+
+# 24. STREAM UI DESIGN
+
+画面を以下の領域に分割する。
+
+## 中央
+
+- 3D地球
+- 国際通信経路
+- 仮想中継サーバー
+- 衛星
+- 着弾波紋
+- Botクラスタ
+- ガラポン
+
+## 左側
+
+- Bot総数
+- 国別Bot数
+- 攻撃平均スコア
+- 最大脅威スコア
+- 仮想通信量
+- パケット数
+- PPS
+- Attack Stage
+
+## 右側
+
+- ずんだもん
+- 衣装
+- 表情
+- 日本語実況
+- 英語翻訳
+- 用語解説
+- イベント履歴
+
+## 下側
+
+- RX / TX
+- Gbps / Tbps
+- RTT
+- Packet Loss
+- Blocked
+- Quarantined
+- Simulation Status
+- 検査セッション情報
+
+## 上側
+
+- THUNDERHALLロゴ
+- GLOBAL EVENT
+- SECURITY ALERT
+- EARTHQUAKE ALERT
+- EMERGENCY ALERT
+- LIVE DATA STATUS
+- SIMULATION / LIVE 表示
+
+配信画面では実際のIP・MAC・認証情報・秘密鍵・機密ログを初期設定で非表示にする。
+
+---
+
+# 25. SYSTEM ARCHITECTURE
+
+```text
+THUNDERHALL TESTER CORE
+        |
+        v
+AUTHORIZATION & SCOPE VALIDATOR
+        |
+        v
+SYSTEM UNDERSTANDING ENGINE
+        |
+        v
+ATTACK SURFACE ANALYZER
+        |
+        v
+VULNERABILITY DISCOVERY ENGINE
+        |
+        v
+SAFE TEST EXECUTION ENGINE
+        |
+        v
+VERIFIED FINDING & EVIDENCE ENGINE
+        |
+        +-------------------------------+
+        |                               |
+        v                               v
+SECURITY REPORT ENGINE          VERIFIED EVENT BUS
+                                        |
+                                        v
+                              GLOBAL BATTLE ARENA
+                                        |
+                  +---------------------+---------------------+
+                  |                     |                     |
+                  v                     v                     v
+             BOT SIMULATOR         GLOBAL GLOBE         GACHAPON ENGINE
+                  |                     |                     |
+                  v                     v                     v
+             NETWORK MAP           ROUTE ENGINE           PHYSICS
+                  |                     |                     |
+                  +---------------------+---------------------+
+                                        |
+                 +----------------------+---------------------+
+                 |                      |                     |
+                 v                      v                     v
+          ZUNDAMON ENGINE          TELEMETRY            EMERGENCY FEED
+                 |                      |                     |
+                 v                      v                     v
+           VOICEVOX ENGINE        STATISTICS            OFFICIAL ALERTS
+                 |                      |                     |
+                 +----------------------+---------------------+
+                                        |
+                                        v
+                                  STREAM OVERLAY
+                                        |
+                                        v
+                                       OBS
+```
+
+## 25.1 一方向通信
+
+Tester Coreから演出システムへ検証済みイベントを送る。
+
+演出システムからTester Coreへ任意コマンドを返さない。
+
+## 25.2 障害分離
+
+以下が停止してもセキュリティ検査は継続できる。
+
+- 3D描画
+- 物理演算
+- VOICEVOX
+- 音声再生
+- OBS
+- Bot Simulator
+- 地球マップ
+- 外部緊急情報取得
+- エフェクト処理
+
+---
+
+# 26. PERFORMANCE & RELIABILITY
+
+- 3D FPS監視
+- Bot数に応じた描画最適化
+- GPU利用
+- CPU・RAM表示
+- 物理演算負荷管理
+- 音声非同期処理
+- 音声キャッシュ
+- イベント重複防止
+- 長時間実行
+- メモリリーク対策
+- 再接続制御
+- 低スペックモード
+- 大規模クラスタ集約
+- 数値オーバーフロー防止
+
+演出機能はTester Coreより優先してはならない。
+
+描画負荷が高い場合は段階的に演出品質を下げる。
+
+---
+
+# 27. SECURITY & PRIVACY RULES
+
+## 27.1 許可された検査対象
+
+- ユーザー所有システム
+- 明示的な許可のあるシステム
+- 専用ローカル検証環境
+- 許可されたVM・コンテナ・テストネットワーク
+
+## 27.2 禁止事項
+
+- 無許可の外部システム侵入
+- 実データ窃取
+- 認証情報収集
+- 実アカウント乗っ取り
+- 外部システムへの永続化
+- 検知回避
+- ログ消去
+- 横展開
+- 実ボットネット構築
+- 破壊コード
+- 実環境へのDoS
+- 検査対象外への攻撃
+- 第三者サーバーの踏み台利用
+- 実際の大量パケット送信
+
+## 27.3 地理情報の正確性
+
+実際のIPから推定できる位置は誤差を含む場合がある。
+
+IPの地理情報だけで攻撃者の身元・住所・正確な所在地を断定しない。
+
+実際の通信経路と仮想経路を区別する。
+
+MACアドレスは観測できないネットワーク境界の先まで推測しない。
+
+配信では匿名化を初期設定にする。
+
+---
+
+# 28. LICENSING & THIRD-PARTY ATTRIBUTION
+
+以下の利用条件を個別に確認する。
+
+- VOICEVOX ENGINE
+- ずんだもん音源モデル
+- ずんだもん立ち絵
+- 衣装差分
+- BGM
+- 効果音
+- 3Dモデル
+- 地図データ
+- 地理情報
+- 地球テクスチャ
+- 公的緊急情報データ
+
+VOICEVOXデスクトップアプリを別途起動させず、Tester側でEngineを管理する。
+
+必要なライセンス表記・クレジットを実装する。
+
+第三者素材を許可なく同梱・再配布しない。
+
+---
+
+# 29. REQUIRED TESTS
+
+## AI Security
+
+- System Understanding
+- Architecture Mapping
+- Data Flow Analysis
+- Attack Surface Discovery
+- CVE照合
+- CWE分析
+- 静的解析
+- 動的解析
+- Fuzzing
+- 状態遷移検査
+- 未知脆弱性候補分類
+- 偽陽性評価
+- 安全な再現試験
+- 修正後回帰テスト
+
+## Global Simulation
+
+- 地球3D描画
+- 国・都市座標
+- 都道府県表示
+- 通信経路の弧状描画
+- 多段中継
+- 衛星経由
+- 着弾波紋
+- カメラ追従
+- 実測・仮想経路の区別
+
+## Bot & Packet Scale
+
+- 仮想IP生成
+- 仮想MAC生成
+- ID重複防止
+- 10 / 50 / 100 / 500 / 1,000体
+- 大量クラスタ
+- 1京集約表示
+- 1京パケット総数境界
+- 数値オーバーフロー
+- 測定不能表示
+
+## Telemetry
+
+- 攻撃平均スコア
+- 最大脅威スコア
+- RX / TX
+- PPS
+- Gbps / Tbps
+- RTT
+- Packet Loss
+- 単位変換
+- 日本語読み上げ
+- 英語翻訳
+
+## Entertainment
+
+- EFFECT-01〜EFFECT-52
+- 4段階カプセル
+- 青ミニカプセル
+- 物理演算
+- 30・50・100・200個の演出
+- ずんだもん衣装
+- 音声同期
+- OBS同期
+- フェイク演出の安全性
+
+## Emergency Alerts
+
+- 気象庁情報取得
+- 地震情報
+- 津波情報
+- 情報更新・解除
+- J-Alert関連情報
+- 国民保護情報
+- 発表元確認
+- 重複通知防止
+- 古い情報の除外
+- データ取得失敗
+- 緊急モードへの切替
+- ゲーム演出の中断
+
+---
+
+# 30. DEVELOPMENT PHASES
+
+## PHASE 1 — READ-ONLY AUDIT
+
+最初に現在のリポジトリを調査する。
+
+- Git branch
+- HEAD commit
+- git status
+- tracked files
+- untracked files
+- modified files
+- 現在のAI
+- スキャナー
+- 脆弱性検査
+- Bot Simulator
+- 3D UI
+- ガラポン
+- VOICEVOX
+- OBS
+- 緊急情報機能
+- 依存関係
+- 既存テスト
+
+既存機能の実装状況を分類する。
+
+## PHASE 2 — INTEGRATED DESIGN
+
+以下を提出する。
+
+1. System Understanding Architecture
+2. Attack Surface Discovery Design
+3. Zero-Day Candidate Engine Design
+4. Safe Test Execution Design
+5. Bot Simulation Design
+6. Global Earth Map Design
+7. Global Route Visualization Design
+8. Satellite Simulation Design
+9. One Quadrillion Aggregation Design
+10. Telemetry Design
+11. Japanese Commentary Design
+12. Gachapon Physics Design
+13. 52 Effects Catalog
+14. Zundamon Voice & Costume Design
+15. OBS Streaming Design
+16. Emergency Alert Design
+17. Security Separation Design
+18. Performance Plan
+19. License Compliance Report
+20. Proposed File Changes
+21. Regression Test Plan
+
+この段階で停止する。
+
+## PHASE 3 — APPROVED IMPLEMENTATION
+
+ユーザーから明示的な承認を受けた機能・ファイル・範囲だけを実装する。
+
+既存コードを無断で上書きしない。
+
+## PHASE 4 — VALIDATION
+
+- ローカル合成データ
+- 隔離VM・コンテナ
+- 許可されたテスト環境
+- 仮想ネットワーク
+- 演出用シミュレーション
+- OBSテスト環境
+
+で検証する。
+
+---
+
+# 31. ABSOLUTE WORK PRESERVATION RULES
+
+絶対禁止：
+
+- `git reset`
+- `git clean`
+- `git restore`
+- 既存作業を破壊するcheckout
+- 未追跡ファイルの削除
+- 既存ファイルの無断上書き
+- モデル重みの変更
+- 学習データの変更
+- DB・ログ・認証情報の削除
+- Git commit / push / PR / merge / release
+- 依存関係の無断追加
+- 外部通信の無断実行
+- ホストFirewall / Routing / Kernel / NICの変更
+- XDP / TCの実NICへの無断アタッチ
+- nftablesの実環境適用
+- 本番COREへの接続
+- 外部サーバーへの攻撃通信
+- 実際の大量パケット送信
+
+外部データソース・気象庁・公的情報との接続を追加する場合は、接続先・通信内容・頻度・保存データ・失敗時の挙動を事前に提示する。
+
+既存の未コミット変更・未追跡ファイル・保護データを作業前後で確認する。
+
+---
+
+# 32. FINAL ACCEPTANCE CRITERIA
+
+以下を確認する。
+
+1. テスト対象のシステム構造を理解できる。
+2. Attack Surface Mapを生成できる。
+3. 既知脆弱性を検査できる。
+4. 未知脆弱性候補を検出できる。
+5. 隔離環境で安全に再現性を評価できる。
+6. 偽陽性と未検証候補を区別できる。
+7. 修正案と回帰テストを作成できる。
+8. 仮想Botを個別・集約表示できる。
+9. 地球全体の3Dマップを表示できる。
+10. 国際通信経路を弧状に描画できる。
+11. 多段中継・衛星経路を仮想表示できる。
+12. 着弾地点に円形波紋が発生する。
+13. 地球規模のカメラワークを実装できる。
+14. 1京規模の集約表示に対応できる。
+15. 1京パケットの総数カウンターを正確に扱える。
+16. 平均脅威スコア・通信速度などを表示できる。
+17. ずんだもんが日本語で統計実況できる。
+18. 英語の情報を日本語に翻訳できる。
+19. 4段階カプセルを物理演算で動作させる。
+20. EFFECT-01〜EFFECT-52を管理できる。
+21. VOICEVOX ENGINEをバックグラウンド管理できる。
+22. OBSと同期できる。
+23. 気象庁・公的緊急情報を検証して表示できる。
+24. 緊急情報がゲーム演出より優先される。
+25. シミュレーション・実測・推定値を区別できる。
+26. 演出側からTester Coreへ任意コマンドを送れない。
+27. 演出機能停止時もTester Coreが動作する。
+28. 個人情報・認証情報を配信画面に漏らさない。
+29. 全テスト結果に再現可能な証拠を付ける。
+
+未確認の項目を完成扱いにしてはならない。
+
+---
+
+# 33. 最終提出物
+
+1. `THUNDERHALL_MASTER_ARCHITECTURE.md`
+2. `THUNDERHALL_SYSTEM_UNDERSTANDING.md`
+3. `THUNDERHALL_ZERO_DAY_DISCOVERY.md`
+4. `THUNDERHALL_SAFE_TEST_EXECUTION.md`
+5. `THUNDERHALL_GLOBAL_BATTLEFIELD.md`
+6. `THUNDERHALL_GLOBAL_ROUTE_SIMULATION.md`
+7. `THUNDERHALL_QUADRILLION_SCALE_DESIGN.md`
+8. `THUNDERHALL_TELEMETRY_ENGINE.md`
+9. `THUNDERHALL_GACHAPON_PHYSICS.md`
+10. `THUNDERHALL_EFFECTS_52_CATALOG.md`
+11. `THUNDERHALL_ZUNDAMON_ENGINE.md`
+12. `THUNDERHALL_OBS_STREAMING.md`
+13. `THUNDERHALL_EMERGENCY_ALERTS.md`
+14. `THUNDERHALL_SECURITY_PRIVACY.md`
+15. `THUNDERHALL_PERFORMANCE_PLAN.md`
+16. `THUNDERHALL_LICENSE_COMPLIANCE.md`
+17. `THUNDERHALL_FILE_CHANGE_PLAN.md`
+18. `THUNDERHALL_REGRESSION_TEST_PLAN.md`
+19. `THUNDERHALL_REMAINING_RISKS.md`
+
+---
+
+# 34. FINAL DESIGN PHILOSOPHY
+
+THUNDERHALL Testerは、対象システムの内部構造を理解し、既知・未知の弱点を分析し、安全な環境で検証する高度なAIセキュリティテスターである。
+
+その検査過程を、地球規模の3Dネットワークバトルとして可視化する。
+
+世界中の仮想Botが複数の国・中継サーバー・衛星を経由し、日本の防衛システムへ向かう。
+
+通信は地球の曲率に沿った光の弧として描かれ、着弾地点には円形の波紋が広がる。
+
+大規模な仮想Bot群は1京規模まで集約表示できる設計とし、平均脅威スコア・通信速度・遅延・パケット数などをリアルタイムで表示する。
+
+ずんだもんは専門用語を日本語へ翻訳し、技術情報を幅広い年代の視聴者に分かりやすく実況する。
+
+ガラポンは物理演算で動作し、緑・オレンジ・赤・金のカプセル、52種類の演出、衣装変更、音響、逆転ドッキリ、OBS配信を統合する。
+
+実際の災害・国民保護情報は公的な情報源から確認し、緊急時はゲーム演出より人命と安全情報を優先する。
+
+**セキュリティ検査の正確性・安全性・証拠保全を維持しながら、世界規模のサイバー戦場を再現する、技術教育・セキュリティ検証・ライブエンターテインメント統合プラットフォームを構築せよ。**
+
+最初はREAD-ONLY監査と統合設計までを実施し、修正対象・設計・リスク・テスト計画を提出した時点で停止すること。

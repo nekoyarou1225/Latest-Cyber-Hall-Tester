@@ -562,7 +562,249 @@ async function runAllButtonAndSecurityTests() {
   );
 
   // ---------------------------------------------------------------------------
-  // 7. Python 総合検証スイート実行 & 初期プラン (general.PLUS) 復帰
+  // 7. V2 ULTIMATE GLOBAL CYBER BATTLE ARENA 総合検証 (PART 1〜PART 13)
+  // ---------------------------------------------------------------------------
+  const rArenaState = await request('GET', '/api/arena/state', undefined, aliceAuth);
+  const arenaData = rArenaState.data;
+  record(
+    'V2 PART 2.1 System Understanding Engine',
+    '24次元システム理解エンジン (UNKNOWN 明示・Architecture Graph・Trust Boundary Map)',
+    rArenaState.status === 200 &&
+      arenaData?.system_understanding?.total_dimensions === 24 &&
+      arenaData?.system_understanding?.unknown_dimensions >= 1 &&
+      Array.isArray(arenaData?.system_understanding?.architecture_graph?.nodes) &&
+      Array.isArray(arenaData?.system_understanding?.trust_boundary_map),
+    `dims=${arenaData?.system_understanding?.total_dimensions}, verified=${arenaData?.system_understanding?.verified_dimensions}, unknown=${arenaData?.system_understanding?.unknown_dimensions}`
+  );
+
+  record(
+    'V2 PART 2.2 Autonomous Attack Surface Discovery',
+    '自律アタックサーフェス探索 (asset_id, entry_point, trust_boundary, required_privilege, verification_status)',
+    rArenaState.status === 200 &&
+      Array.isArray(arenaData?.attack_surface) &&
+      arenaData?.attack_surface.length >= 6 &&
+      Boolean(arenaData?.attack_surface[0]?.asset_id && arenaData?.attack_surface[0]?.trust_boundary),
+    `surfaces=${arenaData?.attack_surface?.length}, first=${arenaData?.attack_surface?.[0]?.asset_id}`
+  );
+
+  const rAiScanFull = await request('POST', '/api/arena/ai-scan', { scan_mode: 'FULL_8_ENGINES' }, aliceAuth);
+  const rAiScanZd = await request('POST', '/api/arena/ai-scan', { scan_mode: 'ZERO_DAY_FOCUS' }, aliceAuth);
+  const zdCandidate = rAiScanZd.data?.scan_result?.findings?.find(
+    (c: any) => c.classification === 'POTENTIAL_ZERO_DAY' || c.classification === 'UNKNOWN_VULNERABILITY_CANDIDATE'
+  );
+  record(
+    'V2 PART 2.3 & 2.4 AI Vulnerability & 9-Step Safe Sandbox',
+    '8種AIエンジン検査・7分類体系・9ステップ安全再現サンドボックス & 自動ロールバック検証',
+    rAiScanFull.status === 200 &&
+      rAiScanFull.data?.scan_result?.engines_executed?.length === 8 &&
+      rAiScanZd.status === 200 &&
+      Boolean(zdCandidate) &&
+      rAiScanZd.data?.sandbox_report?.steps?.length === 9 &&
+      rAiScanZd.data?.sandbox_report?.target_state_restored === true &&
+      rAiScanZd.data?.sandbox_report?.external_network_blocked === true,
+    `engines=${rAiScanFull.data?.scan_result?.engines_executed?.length}, candidate=${zdCandidate?.finding_id} (${zdCandidate?.classification}), sandbox_steps=${rAiScanZd.data?.sandbox_report?.steps?.length}, restored=${rAiScanZd.data?.sandbox_report?.target_state_restored}`
+  );
+
+  // Bot Scale 10,000 (Verify 10,000 unique MACs + RFC 5737 TEST-NET IPv4)
+  const rBot10k = await request(
+    'POST',
+    '/api/arena/bot-scale',
+    { virtual_bots: '10000', target_packets: '1000000', verify_unique_batch: 10000 },
+    aliceAuth
+  );
+  const idVer = rBot10k.data?.identity_verification;
+  record(
+    'V2 PART 3 & 4 Bot Arena 10,000 Unique MAC & RFC 5737',
+    '10,000 Bot 同時生成・MAC 重複ゼロ保証 (10,000 Unique)・RFC 5737/3849 専用アドレス検証',
+    rBot10k.status === 200 &&
+      idVer?.unique_mac_count === 10000 &&
+      idVer?.zero_collision_verified === true &&
+      idVer?.all_ipv4_rfc5737_compliant === true &&
+      idVer?.all_ipv6_rfc3849_compliant === true,
+    `unique_macs=${idVer?.unique_mac_count}, zero_collision=${idVer?.zero_collision_verified}, rfc5737=${idVer?.all_ipv4_rfc5737_compliant}`
+  );
+
+  // Bot Scale 10^16 (1 Quadrillion / 1京) BigInt Precision + Separated Telemetry & Threat Scores
+  const rBot10p16 = await request(
+    'POST',
+    '/api/arena/bot-scale',
+    { virtual_bots: '10000000000000000', target_packets: '10000000000000000' },
+    aliceAuth
+  );
+  const rArenaState16 = await request('GET', '/api/arena/state', undefined, aliceAuth);
+  const sepTel = rArenaState16.data?.separated_telemetry;
+  record(
+    'V2 PART 4.3 & PART 5 10^16 (1京) Scale & Separated Telemetry/Scores',
+    '10^16 (1京) BigInt 精度保持・衛星軌道 (LEO/MEO/GEO)・5種脅威スコア & 7種通信テレメトリ完全分離',
+    rBot10p16.status === 200 &&
+      sepTel?.one_quadrillion_scale?.virtual_bots_exact_decimal === '10000000000000000' &&
+      sepTel?.one_quadrillion_scale?.target_packets_exact_decimal === '10000000000000000' &&
+      rArenaState16.data?.satellite_orbits?.length === 4 &&
+      rArenaState16.data?.japan_strategic_nodes?.length >= 13 &&
+      typeof sepTel?.threat_scores?.overall_defense_score === 'number' &&
+      typeof sepTel?.communication_telemetry?.inbound_rx_bps?.simulated_test_bps === 'string',
+    `bot_scale=${sepTel?.one_quadrillion_scale?.virtual_bots_formatted_ja}, sats=${rArenaState16.data?.satellite_orbits?.length}, overall_defense=${sepTel?.threat_scores?.overall_defense_score}`
+  );
+
+  // Gachapon 52 Effects & Core Breach 12-Step Sequence
+  const rGachaCore = await request(
+    'POST',
+    '/api/arena/gachapon/spin',
+    { effect_id: 'EFFECT-44', force_core_breach: true },
+    aliceAuth
+  );
+  const spinRes = rGachaCore.data?.spin;
+  record(
+    'V2 PART 7 & PART 8 3D Gachapon, 52 Effects & Core Breach',
+    '全52種エフェクトカタログ・判定先行ルール (security_result_determined_first)・Core Breach 12段階演出',
+    arenaData?.gachapon?.total_effects_catalog_count === 52 &&
+      rGachaCore.status === 200 &&
+      spinRes?.security_result_determined_first === true &&
+      spinRes?.core_breach_triggered === true &&
+      spinRes?.core_breach_12_steps?.length === 12 &&
+      spinRes?.zundamon_costume === 'SUPREME_GOLDEN_ZUNDAMON',
+    `catalog=${arenaData?.gachapon?.total_effects_catalog_count}, rank=${spinRes?.final_capsule_rank}, core_steps=${spinRes?.core_breach_12_steps?.length}, costume=${spinRes?.zundamon_costume}`
+  );
+
+  // Zundamon 6 Costumes + VOICEVOX 127.0.0.1:50021 Local Binding
+  const rVv = await request(
+    'POST',
+    '/api/arena/voicevox/speak',
+    { zundamon_ja: 'サンダーホール検証テストなのだ' },
+    aliceAuth
+  );
+  const allCostumesCount = arenaData?.zundamon_and_alert?.all_6_costumes
+    ? Object.keys(arenaData.zundamon_and_alert.all_6_costumes).length
+    : 0;
+  record(
+    'V2 PART 6 & PART 9 Zundamon 6 Costumes & VOICEVOX Local Binding',
+    'ずんだもん全6種衣装・日英同時解説・専門用語7種・VOICEVOX 127.0.0.1:50021 ローカル限定疎通確認',
+    allCostumesCount === 6 &&
+      arenaData?.zundamon_and_alert?.glossary_cards?.length === 7 &&
+      rVv.status === 200 &&
+      rVv.data?.voicevox_engine?.bind_address === '127.0.0.1:50021' &&
+      rVv.data?.voicevox_engine?.external_exposure === false,
+    `costumes=${allCostumesCount}, glossary=${arenaData?.zundamon_and_alert?.glossary_cards?.length}, bind=${rVv.data?.voicevox_engine?.bind_address}, external_exposure=${rVv.data?.voicevox_engine?.external_exposure}`
+  );
+
+  // Public Emergency Alert Override Priority #1 + Prohibition on Fake Game Alerts
+  const rFakeAlert = await request(
+    'POST',
+    '/api/arena/emergency-alert',
+    { attempt_fake_game_alert: true },
+    aliceAuth
+  );
+  const rDrillAlert = await request(
+    'POST',
+    '/api/arena/emergency-alert',
+    { action: 'trigger_drill', alert_type: 'JMA_EARTHQUAKE_EEW' },
+    aliceAuth
+  );
+  const rSpinBlockedDuringAlert = await request(
+    'POST',
+    '/api/arena/gachapon/spin',
+    { effect_id: 'EFFECT-01' },
+    aliceAuth
+  );
+  const rClearAlert = await request(
+    'POST',
+    '/api/arena/emergency-alert',
+    { action: 'clear' },
+    aliceAuth
+  );
+  record(
+    'V2 PART 10 Public Emergency Alert Priority #1 Override',
+    '偽緊急警報演出の厳格拒否(403)・緊急警報時のガチャ/VOICEVOX即時停止(409) & RED_ALERT衣装切替・解除復帰',
+    rFakeAlert.status === 403 &&
+      rDrillAlert.status === 200 &&
+      rDrillAlert.data?.emergency_alert?.active === true &&
+      rDrillAlert.data?.emergency_alert?.gachapon_paused === true &&
+      rDrillAlert.data?.state?.cyber_arena?.zundamon?.current_costume === 'RED_ALERT_COMMANDER_ZUNDAMON' &&
+      rSpinBlockedDuringAlert.status === 409 &&
+      rClearAlert.status === 200 &&
+      rClearAlert.data?.emergency_alert?.active === false,
+    `fake_blocked=${rFakeAlert.status}, drill_active=${rDrillAlert.data?.emergency_alert?.active}, spin_blocked=${rSpinBlockedDuringAlert.status}, cleared=${!rClearAlert.data?.emergency_alert?.active}`
+  );
+
+  // Restore default bot scale (100) after 10^16 test
+  await request(
+    'POST',
+    '/api/arena/bot-scale',
+    { virtual_bots: '100', target_packets: '1000' },
+    aliceAuth
+  );
+
+  // ---------------------------------------------------------------------------
+  // 7B. 追加条項 V2.1 & V2.2 包括検証 (Gemini セリフ検疫・VOICEVOX 127.0.0.1・OBS不要5段階内蔵配信・受け入れ検証6項目)
+  // ---------------------------------------------------------------------------
+  console.log('\n--- [V2.1 & V2.2] 追加条項 V2.1 (信頼性/視覚安全/地理表現/MK1Ai規則/緊急情報) & V2.2 (Gemini/VOICEVOX/内蔵配信/受け入れ検証6項目) ---');
+
+  // V2.1 Clause A: Researcher Mode disables Fake Reversal Effects (EFFECT-49..52)
+  const rModeResearch = await request(
+    'POST',
+    '/api/v22/policy',
+    { operation_mode: 'RESEARCHER_MODE' },
+    aliceAuth
+  );
+  const rFakeSpinBlocked = await request(
+    'POST',
+    '/api/arena/gachapon/spin',
+    { effect_id: 'EFFECT-49' },
+    aliceAuth
+  );
+  // Restore ENTERTAINMENT_MODE
+  const rModeEnt = await request(
+    'POST',
+    '/api/v22/policy',
+    { operation_mode: 'ENTERTAINMENT_MODE', real_geography_explicitly_enabled: false },
+    aliceAuth
+  );
+  const rFakeSpinAllowedInEnt = await request(
+    'POST',
+    '/api/arena/gachapon/spin',
+    { effect_id: 'EFFECT-49' },
+    aliceAuth
+  );
+  record(
+    'V2.1 Clause A & D Reliability & Researcher Mode',
+    '研究者モードでフェイク演出 (EFFECT-49〜52) が 403 無効化され、エンタメモードでは【演出 / SIMULATION】最前面固定で動作すること',
+    rModeResearch.status === 200 &&
+      rFakeSpinBlocked.status === 403 &&
+      rModeEnt.status === 200 &&
+      rFakeSpinAllowedInEnt.status === 200 &&
+      rModeEnt.data?.v21_policy?.simulation_overlay_locked_topmost === true &&
+      rModeEnt.data?.v21_policy?.fictional_missile_icbm_implemented === false,
+    `researcher_effect49=${rFakeSpinBlocked.status}, ent_effect49=${rFakeSpinAllowedInEnt.status}, sim_overlay_topmost=${rModeEnt.data?.v21_policy?.simulation_overlay_locked_topmost}`
+  );
+
+  // V2.1 Clause C: Fictional Region Names by default (Region A-01, Relay-01)
+  const rArenaFictional = await request('GET', '/api/arena/state', undefined, aliceAuth);
+  const sampleBot0 = rArenaFictional.data?.bots_sample?.[0];
+  record(
+    'V2.1 Clause C & E Fictional Geography & Non-Official Disclaimer',
+    '既定で実在国名を使わず架空リージョン名 (Region A-01 / Relay-01) を使用し、「この配信は公式情報源ではありません」を常時保持すること',
+    Boolean(sampleBot0?.origin_country?.startsWith('Region ')) &&
+      Boolean(sampleBot0?.origin_city?.startsWith('Relay-')) &&
+      rArenaFictional.data?.v21_policy?.non_official_source_disclaimer_ja ===
+        'この配信は公式情報源ではありません。公式情報を確認してください',
+    `bot0_origin=${sampleBot0?.origin_country}/${sampleBot0?.origin_city}, disclaimer='${rArenaFictional.data?.v21_policy?.non_official_source_disclaimer_ja}'`
+  );
+
+  // V2.2 Section D: 6-Item Acceptance Verification Suite (D.1 to D.6)
+  const rV22Accept = await request('POST', '/api/v22/acceptance-tests', {}, aliceAuth);
+  const acceptReport = rV22Accept.data?.report;
+  record(
+    'V2.2 Section D 6-Item Acceptance Verification Suite',
+    'D.1 APIキー/StreamKey秘匿・D.2 Gemini不正出力破棄・D.3 429テンプレ切替・D.4 VOICEVOX停止時字幕切替(別TTS模倣禁止)・D.5 5段階手動配信・D.6 N100 720p30継続',
+    rV22Accept.status === 200 &&
+      acceptReport?.all_passed === true &&
+      acceptReport?.results?.length === 6 &&
+      acceptReport?.results?.every((x: any) => x.passed === true),
+    `all_passed=${acceptReport?.all_passed}, passed_count=${acceptReport?.results?.filter((x: any) => x.passed).length}/6`
+  );
+
+  // ---------------------------------------------------------------------------
+  // 8. Python 総合検証スイート実行 & 初期プラン (general.PLUS) 復帰
   // ---------------------------------------------------------------------------
   const rPy = await request('POST', '/api/security/run-python-tests', {}, aliceAuth);
   record(
